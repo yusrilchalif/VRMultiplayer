@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a07f8a50b04b74744b5b75da4dacb5ea
+guid: adb5470e68c8e4b4aa9b02e4d9badfe7
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -8,372 +8,372 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: ACFanOutside
-    second: {fileID: 2100000, guid: c0a3e8758599644bea6e6c605dca2fb5, type: 2}
+    second: {fileID: 2100000, guid: 1e0996952a25f3b4c963bf1c5a80b823, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Asphalt
-    second: {fileID: 2100000, guid: 320d925a965214b3fb9a7bd9a84cea1e, type: 2}
+    second: {fileID: 2100000, guid: f1920fe1d4b6c714ca51eb4c724ecf91, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Banner
-    second: {fileID: 2100000, guid: 599ccf2ad12ec4ec2be6f34365a6d3da, type: 2}
+    second: {fileID: 2100000, guid: a0244ec6a1697f04f986166b502d54d5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Bark_Frond_Mat
-    second: {fileID: 2100000, guid: 43e8f8ffbc33143e993c2e462e889ef3, type: 2}
+    second: {fileID: 2100000, guid: 02efbcd17a12ac945b438af13ec78787, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Base White
-    second: {fileID: 2100000, guid: 769a4881c66944afba7b1f6f1b19d355, type: 2}
+    second: {fileID: 2100000, guid: 84aa8dd033241f64e93f0c441947b6c3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Besi
-    second: {fileID: 2100000, guid: eb8cae7e37b3e4b3a8af1c5118cfcfa4, type: 2}
+    second: {fileID: 2100000, guid: 1e9aa447aa4782043920a49157151b0c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Besi Biru
-    second: {fileID: 2100000, guid: 23cebbf9f279a4cee949475c4cf2c4f2, type: 2}
+    second: {fileID: 2100000, guid: 449d4ee6eca8ba744bcf20aba3dd26bc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Besi Hijau
-    second: {fileID: 2100000, guid: 3cc5e2da0b4404cf8bbb44ce4af9250e, type: 2}
+    second: {fileID: 2100000, guid: 96800ec40f796e744a197cb132face8b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Besi Kuning
-    second: {fileID: 2100000, guid: 06e3288229e2e4b8399927981d74a4e8, type: 2}
+    second: {fileID: 2100000, guid: c453003b2ebac5348b6a03dc53119cac, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Besi Pembatas
-    second: {fileID: 2100000, guid: 62476188a55934fa3bf210f8e7d77127, type: 2}
+    second: {fileID: 2100000, guid: ee219304e1359814bad271292cad2f96, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Besi.001
-    second: {fileID: 2100000, guid: d0be3761ac225459b8b1a11104413a89, type: 2}
+    second: {fileID: 2100000, guid: 1942f8bd548c0dc42851c8edfcb2e5b2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Bidet Ceramic
-    second: {fileID: 2100000, guid: d6e1df9c06e3f4112ba1eda9c76124a0, type: 2}
+    second: {fileID: 2100000, guid: 62b657bf6fe5ec346b70da8f1e412edf, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Black
-    second: {fileID: 2100000, guid: 9647a89b9b2d243ca85e5f9d41a48992, type: 2}
+    second: {fileID: 2100000, guid: 7f74f5ad8869a8849bb9cbe44a960503, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Broadleaf_Desktop_Field_Mat.001
-    second: {fileID: 2100000, guid: 758e7cb1fe89342b78ce7298ae449742, type: 2}
+    second: {fileID: 2100000, guid: 545f7e4ddbfe2564a9bd5ef0fae996f3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Broadleaf_Hero_Field_Mat
-    second: {fileID: 2100000, guid: ee8c9775041424db79747f6ef1c5df5d, type: 2}
+    second: {fileID: 2100000, guid: b423e7fea424e9b4fa4950440f151fc2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Bush_Mediteranean_Frond_Mat
-    second: {fileID: 2100000, guid: b5f1c49435105461f9285245d9542aa4, type: 2}
+    second: {fileID: 2100000, guid: 43a30244ca5cd7942812da2e157a8031, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: C02.001
-    second: {fileID: 2100000, guid: 733611c0d5999419ea9e471e56143e2a, type: 2}
+    second: {fileID: 2100000, guid: fb4ff1b8496bd524094744055757acce, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: C12.001
-    second: {fileID: 2100000, guid: 8404854e67da14548bb6d9eff89ea385, type: 2}
+    second: {fileID: 2100000, guid: ca713d7bfcc2efd4395328831dc9ab88, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: C15.001
-    second: {fileID: 2100000, guid: 0512d5633e98a443c8b21a1cd105cd51, type: 2}
+    second: {fileID: 2100000, guid: 04891e430d3b3ad4c8dc6c099fed429d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Ceramic
-    second: {fileID: 2100000, guid: ba51a40258e3a409c882868c3fe3fd72, type: 2}
+    second: {fileID: 2100000, guid: d29d2dc4b209f8c4daa10f2a7d823e69, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Chrome
-    second: {fileID: 2100000, guid: 05bfaca22c18f4ead896af98ec07d947, type: 2}
+    second: {fileID: 2100000, guid: 6da808118d785c44da37ab7c28e66bec, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Color_E01.001
-    second: {fileID: 2100000, guid: 382697e09039f4ab5b58fc8725e57c02, type: 2}
+    second: {fileID: 2100000, guid: 5918c584d93df53428e79995381f811e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Color_E02.001
-    second: {fileID: 2100000, guid: 51122108137d8414d96ed6ee7a3f96fd, type: 2}
+    second: {fileID: 2100000, guid: 8bd58589aef45ae4d8ea194259df4cd5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Color_I01.001
-    second: {fileID: 2100000, guid: 220123558fcf74f4e84fa0b42e8a622e, type: 2}
+    second: {fileID: 2100000, guid: eea13b72c3a622947aba434ea2322dc3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Color_L01.001
-    second: {fileID: 2100000, guid: 5fb541bae4f3d486db54c03a2b194642, type: 2}
+    second: {fileID: 2100000, guid: 1301b06a12188b74190b288a72621821, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Concrete
-    second: {fileID: 2100000, guid: b6591586b744640a897cca2bac665dd6, type: 2}
+    second: {fileID: 2100000, guid: 48dd1a93a24bdea45990bbba9e9db943, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Concrete In
-    second: {fileID: 2100000, guid: 21385a494e483486cb49a270b92208f7, type: 2}
+    second: {fileID: 2100000, guid: 26ce390bb1714b0439347a72a637df38, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Fence
-    second: {fileID: 2100000, guid: d33f7b027c06f42bc8104dc173f7eac5, type: 2}
+    second: {fileID: 2100000, guid: a3184142615c66848a7c7c42993d62fc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Frame Jendela
-    second: {fileID: 2100000, guid: bc0a72c73fdf74f5e9a008109aed1d90, type: 2}
+    second: {fileID: 2100000, guid: 4f76f3199b9289c47910258b5323992a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Frame Rumput
-    second: {fileID: 2100000, guid: 416bd75a4726749678989afe4dc6ce88, type: 2}
+    second: {fileID: 2100000, guid: b0ec63a315ebe6148ad2f9ae0b083a6d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: GDLM44_builtInMatBlackTyre.001
-    second: {fileID: 2100000, guid: 404fcfbcb65004280812c0b1cb3efd73, type: 2}
+    second: {fileID: 2100000, guid: b64fb3933f851634aad46fdb1a3d80ec, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: GDLM45_BrakeShoe.001
-    second: {fileID: 2100000, guid: a4bfc9bc3e05645c0a5415ca42e4cea3, type: 2}
+    second: {fileID: 2100000, guid: d5810286b24df3d4d8a0dbe2c61ed9a5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: GDLM46_BrakeDisk.001
-    second: {fileID: 2100000, guid: 2358434cbfc49439ba9b7eeb7d17ec8c, type: 2}
+    second: {fileID: 2100000, guid: 15d47c690ceea6647a523894b4aa14f3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Garis Oren
-    second: {fileID: 2100000, guid: 85b1d22898dd94e2d9e74f7a52c09326, type: 2}
+    second: {fileID: 2100000, guid: 84e70b5b7bdf5604c810d8c50920bc81, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Garis Putih
-    second: {fileID: 2100000, guid: 1d8739baec0514abdbd7218c784d230b, type: 2}
+    second: {fileID: 2100000, guid: 1e543f90cb957cf45b76debd3e2e1528, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Glass-Lamp.001
-    second: {fileID: 2100000, guid: cdf14a313047047bf8b91de4b740d1a9, type: 2}
+    second: {fileID: 2100000, guid: e612678111117f84c8e124b146fb83cf, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Glass.001
-    second: {fileID: 2100000, guid: 10aa2add421644cc1a3d4867e0ef9ff2, type: 2}
+    second: {fileID: 2100000, guid: a6f06b00dd44d2f49bb0d0a9724ccaa2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Glass_white
-    second: {fileID: 2100000, guid: fa44f1fdff5ac479c89fae25eb3d0f60, type: 2}
+    second: {fileID: 2100000, guid: cefb8685164a58940b44fbf6709970e0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Grass
-    second: {fileID: 2100000, guid: 96ae1f5b24b7a4a9d868373b40d6edcc, type: 2}
+    second: {fileID: 2100000, guid: 88cdfd0905f59a14dba89faf2de9b7c2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Kaca
-    second: {fileID: 2100000, guid: 92f844045b8274a2a8f13cb5ced85147, type: 2}
+    second: {fileID: 2100000, guid: 05bce2685de83d041af136583e38bfad, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Kaca_Hitam
-    second: {fileID: 2100000, guid: ee8f8d9e7a7184d5e93aa8d2c351dbe3, type: 2}
+    second: {fileID: 2100000, guid: d279e7d274762a0499e98bad447b89ed, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Kayu
-    second: {fileID: 2100000, guid: fe8a236f311874bbfbf6b227b714dd41, type: 2}
+    second: {fileID: 2100000, guid: 33b040b88929e63489d0ae7fdb8a1a7e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Kilang Air
-    second: {fileID: 2100000, guid: 7a80ae02c6911422395fadce2cba60cf, type: 2}
+    second: {fileID: 2100000, guid: f1914c0638b758143a8d4ed9c1027052, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Lampu
-    second: {fileID: 2100000, guid: 5f85c952c7a1d40ba9fbe006b88321d3, type: 2}
+    second: {fileID: 2100000, guid: 9cffd11e8892f774c99b29b74397cdc7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Lantai
-    second: {fileID: 2100000, guid: 8e30132e716284a1bb8ecf01df12227a, type: 2}
+    second: {fileID: 2100000, guid: 4ee1386e25f928b418648aef15980cb8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Main_Bark_Mat.001
-    second: {fileID: 2100000, guid: c8960c217575549d7a1c1b7d96d05f99, type: 2}
+    second: {fileID: 2100000, guid: 504bf02684779b3489c2af4fc62c6ec5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Main_Bark_Mat.002
-    second: {fileID: 2100000, guid: 08abd647d771c48369e19e1cca5a8754, type: 2}
+    second: {fileID: 2100000, guid: 3d782a0ff00d1b34fbc0d18d7c464316, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Metal-Chrome.001
-    second: {fileID: 2100000, guid: 6bfa13822ba924e11ad1fe6c293138d1, type: 2}
+    second: {fileID: 2100000, guid: 0c4a8853078e1c342b80b36d6fbc7056, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Metal-Iron.001
-    second: {fileID: 2100000, guid: e25d3ebc7fe3e40d78b61d94ee585857, type: 2}
+    second: {fileID: 2100000, guid: 7aaaf77d853535a4b994e2555043d605, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Metal-Stainless_Steel.001
-    second: {fileID: 2100000, guid: 32c169124db8244f2b5d315de42f7ea5, type: 2}
+    second: {fileID: 2100000, guid: 755694c9daa4eae4e863648a8fd7717e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Metal-Zinc.001
-    second: {fileID: 2100000, guid: eba2220fbbfdd41a68ab245723aaae94, type: 2}
+    second: {fileID: 2100000, guid: e752bf21ee6e0c24cad627c07f32b831, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Misc-Ice.001
-    second: {fileID: 2100000, guid: 3e5e28b56793c46b392b65bd8719ef69, type: 2}
+    second: {fileID: 2100000, guid: 920f64c739f331545ab17d5e04e4d243, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Paving-Asphalt_Smooth.001
-    second: {fileID: 2100000, guid: 527eed7d783204ab4823c69704ea76c1, type: 2}
+    second: {fileID: 2100000, guid: 40a712c40536a7d4dbc741638d5e02c5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Pegangan Tangga
-    second: {fileID: 2100000, guid: fc5300689db28438f9ea9da43cd231db, type: 2}
+    second: {fileID: 2100000, guid: 4cb44e1f9e693a043b8b315a6728236b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Pintu
-    second: {fileID: 2100000, guid: f82dabd9f289d4d338f5bb804929a00f, type: 2}
+    second: {fileID: 2100000, guid: 1303baeb746150942b455be5cbba1ab4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Pintu Kamar Mandi
-    second: {fileID: 2100000, guid: 0bbae98c434674816a2db05e8568861d, type: 2}
+    second: {fileID: 2100000, guid: 92cb7bd2d4393ae4d9276369c4a022c3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Pintu Kamar Mandi merah
-    second: {fileID: 2100000, guid: ed8baa6f0f9f449c4a0d2b41f7d7d3f5, type: 2}
+    second: {fileID: 2100000, guid: 09d44c5c4cc81154688e4d1fd9b7787e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Plafon
-    second: {fileID: 2100000, guid: e64bc908dff3e47b0a960290affae942, type: 2}
+    second: {fileID: 2100000, guid: de4329fea8b9f634b85c46aa5e4ae604, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Presentation Board
-    second: {fileID: 2100000, guid: b8b42501502664fc5b008ed41cf53ffe, type: 2}
+    second: {fileID: 2100000, guid: cebf5467c45683e408c02a6550777bb9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: RangkaAtapBesi
-    second: {fileID: 2100000, guid: 6bd03162760dc4a42b50f66cc894700d, type: 2}
+    second: {fileID: 2100000, guid: 9e27aa652f8099f458ebdecf019fed47, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Roof
-    second: {fileID: 2100000, guid: 2649b645b7b8946adbb1ab289497388d, type: 2}
+    second: {fileID: 2100000, guid: 176b398e516f5e640ba6a6556d3f1fe2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Selokan Concrete
-    second: {fileID: 2100000, guid: a578b5a84f348405bb38284cd9247275, type: 2}
+    second: {fileID: 2100000, guid: e4b029fa8ebefd14788bf2d796244117, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Steel
-    second: {fileID: 2100000, guid: 5d2546d3cda0b4f418b8437a34a75793, type: 2}
+    second: {fileID: 2100000, guid: 97ddf185d0a5e1046981ab9bf02f92d5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Surface-Whitewash.001
-    second: {fileID: 2100000, guid: 6f7dd73ff366349b7bd55a09dcdb3f4c, type: 2}
+    second: {fileID: 2100000, guid: 038f2ab18bf30c642b0567de1ce79dfe, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tangga
-    second: {fileID: 2100000, guid: c477ffe1c9bfb4a459310f8e1503fb67, type: 2}
+    second: {fileID: 2100000, guid: e3b0f056a7b5a6e43bee1c0b5db7672a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tembok Gedung
-    second: {fileID: 2100000, guid: b81d30a1a76044d2da92918f43a33c90, type: 2}
+    second: {fileID: 2100000, guid: 9f62f62c4b4ab1049b539d58ddab7ada, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tembok Gedung Orange
-    second: {fileID: 2100000, guid: cadad6b38cd454daca3efad143bc2e1a, type: 2}
+    second: {fileID: 2100000, guid: d1641786f5ac416458dc8cdc7ad150b7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tembok Gedung coklat
-    second: {fileID: 2100000, guid: cbbdf5941261d49b0a84f4014edc67c3, type: 2}
+    second: {fileID: 2100000, guid: 9bb55a146faf47d4397aef73db3830b0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tembok Kuning
-    second: {fileID: 2100000, guid: 9c9ab538cadfc4695adfcd6cda4ca35b, type: 2}
+    second: {fileID: 2100000, guid: 70f5dff414ff967499a692e54f817360, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tembok Luar
-    second: {fileID: 2100000, guid: 5465adb398335437dbc985f2200ad74e, type: 2}
+    second: {fileID: 2100000, guid: 79fe2a644ccc2cd4d99c2deec75ec6a5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tembok Sapam
-    second: {fileID: 2100000, guid: 844763d7efcc848fba48ea032dee4519, type: 2}
+    second: {fileID: 2100000, guid: 255ebca09d0086943960b37e406391d5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Vent.001
-    second: {fileID: 2100000, guid: edba08e8932da4bb0a4be2312b416dab, type: 2}
+    second: {fileID: 2100000, guid: 6b02d2ef815d0ad45a6e04c3151850a2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: White Plastic
-    second: {fileID: 2100000, guid: 6042ebbf7c291423cbf6fbe84e8550d3, type: 2}
+    second: {fileID: 2100000, guid: e18f369b6058b1a4dbd6e4131c24fc5b, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: White_Plastic
-    second: {fileID: 2100000, guid: 99f51c5f56594411b9266a29c25ff653, type: 2}
+    second: {fileID: 2100000, guid: 9ff3259078da5d149889e9b4ae04f2aa, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -402,7 +402,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -417,7 +417,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
