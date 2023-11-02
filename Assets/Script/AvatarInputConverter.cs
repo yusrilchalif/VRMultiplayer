@@ -31,17 +31,19 @@ public class AvatarInputConverter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Head and body sync
+        // Head and body sync
         mainAvatarTransform.position = Vector3.Lerp(mainAvatarTransform.position, XRHead.position + headPositionOffest, 0.5f);
         avatarHead.rotation = Quaternion.Lerp(avatarHead.rotation, XRHead.rotation, 0.5f);
         avatarBody.rotation = Quaternion.Lerp(avatarBody.rotation, Quaternion.Euler(new Vector3(0, avatarHead.rotation.eulerAngles.y, 0)), 0.05f);
 
-        //Hands sync
+        // Right hand sync
         avatarHandRight.position = Vector3.Lerp(avatarHandRight.position, xrHandRight.position, 0.5f);
         avatarHandRight.rotation = Quaternion.Lerp(avatarHandRight.rotation, xrHandRight.rotation, 0.5f) * Quaternion.Euler(handRotationOffset);
 
-        avatarHandLeft.position = Vector3.Lerp(avatarHandLeft.position, xrHandLeft.position, 0.5f);
-        avatarHandLeft.rotation = Quaternion.Lerp(avatarHandRight.rotation, xrHandRight.rotation, 0.5f) * Quaternion.Euler(handRotationOffset);
+        // Left hand does not follow the right hand
+        // Remove the interpolation for the left hand
+        avatarHandLeft.position = xrHandLeft.position;
+        avatarHandLeft.rotation = xrHandLeft.rotation * Quaternion.Euler(handRotationOffset);
     }
 
     void ChangeEmulatorCondition()
