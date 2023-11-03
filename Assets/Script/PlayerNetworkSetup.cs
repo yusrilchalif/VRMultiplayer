@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
 {
@@ -12,12 +13,23 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        if(photonView.IsMine)
+        if (photonView.IsMine)
         {
             localXRRigGameObject.SetActive(true);
 
             SetLayerRecursively(avatarHead, 6);
             SetLayerRecursively(avatarBody, 7);
+
+            TeleportationArea[] teleportationAreas = GameObject.FindObjectsOfType<TeleportationArea>();
+
+            if (teleportationAreas.Length > 0)
+            {
+                print("Found " + teleportationAreas.Length + "teleporting area");
+                foreach (var item in teleportationAreas)
+                {
+                    item.teleportationProvider = localXRRigGameObject.GetComponent<TeleportationProvider>();
+                }
+            }
         }
         else
         {
@@ -31,7 +43,7 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void SetLayerRecursively(GameObject go, int layerNumber)

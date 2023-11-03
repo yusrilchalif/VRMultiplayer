@@ -19,6 +19,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         if(PhotonNetwork.IsConnectedAndReady)
         {
+            PhotonNetwork.ConnectUsingSettings();
+        }
+        else
+        {
             PhotonNetwork.JoinLobby();
         }
     }
@@ -48,6 +52,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties = new ExitGames.Client.Photon.Hashtable { { MultiplayerVRConstant.MAP_TYPE_KEY, mapType } };
         PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        print("Connected to server again.");
+        PhotonNetwork.JoinLobby();
     }
 
     public override void OnCreatedRoom()

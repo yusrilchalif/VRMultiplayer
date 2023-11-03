@@ -20,12 +20,12 @@ public class AvatarInputConverter : MonoBehaviour
     public Vector3 handRotationOffset;
 
     //Prefab emulator
-    public GameObject emulator;
+    //public GameObject emulator;
 
     // Start is called before the first frame update
     void Start()
     {
-        ChangeEmulatorCondition();
+        //ChangeEmulatorCondition();
     }
 
     // Update is called once per frame
@@ -46,15 +46,15 @@ public class AvatarInputConverter : MonoBehaviour
         avatarHandLeft.rotation = xrHandLeft.rotation * Quaternion.Euler(handRotationOffset);
     }
 
-    void ChangeEmulatorCondition()
-    {
-        if (Application.isEditor)
-        {
-            emulator.SetActive(true);
-        }
-        else if (!Application.isEditor)
-        {
-            emulator.SetActive(false);
-        }
-    }
+    //void ChangeEmulatorCondition()
+    //{
+    //    if (Application.isEditor)
+    //    {
+    //        emulator.SetActive(true);
+    //    }
+    //    else if (!Application.isEditor)
+    //    {
+    //        emulator.SetActive(false);
+    //    }
+    //}
 }
