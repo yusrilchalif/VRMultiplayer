@@ -5,20 +5,35 @@ using FMODLib = FMOD;
 
 namespace Photon.Voice.FMOD
 {
-    public class AudioInEnumerator : DeviceEnumeratorBase
+    public class AudioInEnumerator : IDeviceEnumerator
     {
         const int NAME_MAX_LENGTH = 1000;
         const string LOG_PREFIX = "[PV] [FMOD] AudioInEnumerator: ";
-        FMODLib.System coreSystem;
-        public AudioInEnumerator(FMODLib.System coreSystem, ILogger logger) : base(logger)
+
+        private DeviceInfo[] devices = new DeviceInfo[0];
+        ILogger logger;
+
+        public AudioInEnumerator(ILogger logger)
         {
-            this.coreSystem = coreSystem;
+            this.logger = logger;
             Refresh();
         }
 
-        public override void Refresh()
+        public bool IsSupported => true;
+
+        public IEnumerable<DeviceInfo> Devices
         {
-            FMODLib.RESULT res = coreSystem.getRecordNumDrivers(out int numDriv, out int numCon);
+            get
+            {
+                return devices;
+            }
+        }
+
+        public string Error { get; private set; }
+
+        public void Refresh()
+        {            
+            FMODLib.RESULT res = FMODUnity.RuntimeManager.CoreSystem.getRecordNumDrivers(out int numDriv, out int numCon);
             if (res != FMODLib.RESULT.OK)
             {
                 Error = "failed to getRecordNumDrivers: " + res;
@@ -26,26 +41,21 @@ namespace Photon.Voice.FMOD
                 return;
             }
 
-            devices = new List<DeviceInfo>();
+            devices = new DeviceInfo[numDriv];
             for (int id = 0; id < numDriv; id++)
             {
-                res = coreSystem.getRecordDriverInfo(id, out string name, NAME_MAX_LENGTH, out Guid guid, out int systemRate, out FMODLib.SPEAKERMODE speakerMode, out int speakerModeChannels, out FMODLib.DRIVER_STATE state);
+                res = FMODUnity.RuntimeManager.CoreSystem.getRecordDriverInfo(id, out string name, NAME_MAX_LENGTH, out Guid guid, out int systemRate, out FMODLib.SPEAKERMODE speakerMode, out int speakerModeChannels, out FMODLib.DRIVER_STATE state);
                 if (res != FMODLib.RESULT.OK)
                 {
                     Error = "failed to getRecordDriverInfo: " + res;
                     logger.LogError(LOG_PREFIX + Error);
                     return;
                 }
-                devices.Add(new DeviceInfo(id, name));
-            }
-
-            if (OnReady != null)
-            {
-                OnReady();
+                devices[id] = new DeviceInfo(id, name);
             }
         }
 
-        public override void Dispose()
+        public void Dispose()
         {
         }
     }

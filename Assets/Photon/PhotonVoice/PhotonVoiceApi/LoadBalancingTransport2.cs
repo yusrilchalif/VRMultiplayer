@@ -21,53 +21,55 @@ namespace Photon.Voice
     /// </summary>
     public class LoadBalancingTransport2 : LoadBalancingTransport
     {
-        public LoadBalancingTransport2(ILogger logger = null, ConnectionProtocol connectionProtocol = ConnectionProtocol.Udp, bool cppCompatibilityMode = false) : base(logger, connectionProtocol, cppCompatibilityMode)
+        public LoadBalancingTransport2(ILogger logger = null, ConnectionProtocol connectionProtocol = ConnectionProtocol.Udp) : base(logger, connectionProtocol)
         {
             this.LoadBalancingPeer.UseByteArraySlicePoolForEvents = true; // incoming byte[] events can be deserialized to a pooled ByteArraySlice
             this.LoadBalancingPeer.ReuseEventInstance = true;             // this won't store references to the event anyways
         }
 
-        public override int GetPayloadFragmentSize(SendFrameParams par)
-        {
-            // rough estimate, TODO: improve and test
-            int overhead = 3 * 2; // possible InterestGroup and Receivers: key, type, value
-            if (par.TargetPlayers != null)
-            {
-                overhead += 3 + par.TargetPlayers.Length; // key, type, compressed ength and array
-            }
-
-            return 1118 - MAX_DATA_OFFSET - overhead; // <- protocol 18 theoretical encrypted; experimental encoded: 1119, non-encrypted: 1134
-        }
-
-        protected override byte FrameCode => VoiceEvent.FrameCode;
-
-        const int MAX_DATA_OFFSET = 5;
-        protected override object buildFrameMessage(byte voiceId, byte evNumber, byte frNumber, ArraySegment<byte> data, FrameFlags flags)
+		const int DATA_OFFSET = 4;
+        public override void SendFrame(ArraySegment<byte> data, FrameFlags flags, byte evNumber, byte voiceId, int channelId, int targetPlayerId, bool reliable, LocalVoice localVoice)
         {
             // this uses a pooled slice, which is released within the send method (here RaiseEvent at the bottom)
-            ByteArraySlice frameData = this.LoadBalancingPeer.ByteArraySlicePool.Acquire(data.Count + MAX_DATA_OFFSET);
+            ByteArraySlice frameData = this.LoadBalancingPeer.ByteArraySlicePool.Acquire(data.Count + DATA_OFFSET);
+            frameData.Buffer[0] = DATA_OFFSET;
+            frameData.Buffer[1] = voiceId;
+            frameData.Buffer[2] = evNumber;
+            frameData.Buffer[3] = (byte)flags;
+            Buffer.BlockCopy(data.Array, 0, frameData.Buffer, DATA_OFFSET, data.Count);
+            frameData.Count = data.Count + DATA_OFFSET; // need to set the count, as we manipulated the buffer directly
 
-            int pos = 1;
-            frameData.Buffer[pos++] = voiceId;
-            frameData.Buffer[pos++] = evNumber;
-            frameData.Buffer[pos++] = (byte)flags;
-            if (evNumber != frNumber)  // save 1 byte if numbers match
+            SendOptions sendOpt = new SendOptions() { Reliability = reliable, Channel = this.photonChannelForCodec(localVoice.Info.Codec), Encrypt = localVoice.Encrypt };
+
+            RaiseEventOptions opt = new RaiseEventOptions();
+            if (targetPlayerId == -1)
             {
-                frameData.Buffer[pos++] = (byte)frNumber;
+                opt.TargetActors = new int[] { this.LocalPlayer.ActorNumber };
             }
-            frameData.Buffer[0] = (byte)pos;
+            else if (targetPlayerId != 0)
+            {
+                opt.TargetActors = new int[] { targetPlayerId };
+            }
+            if (localVoice.DebugEchoMode)
+            {
+                opt.Receivers = ReceiverGroup.All;
+            }
 
-            Buffer.BlockCopy(data.Array, data.Offset, frameData.Buffer, pos, data.Count);
-            frameData.Count = data.Count + pos; // need to set the count, as we manipulated the buffer directly
-            return frameData;
+            opt.InterestGroup = localVoice.InterestGroup;
+
+            this.OpRaiseEvent(VoiceEvent.FrameCode, frameData, opt, sendOpt);
+
+            // each voice has it's own connection? else, we could aggregate voices data in less count of datagrams
+            this.LoadBalancingPeer.SendOutgoingCommands();
         }
+
 
         protected override void onEventActionVoiceClient(EventData ev)
         {
             if (ev.Code == VoiceEvent.FrameCode)
             {
                 // Payloads are arrays. If first array element is 0 than next is event subcode. Otherwise, the event is data frame with voiceId in 1st element.
-                this.onVoiceFrameEvent(ev[(byte)ParameterCode.CustomEventContent], REMOTE_VOICE_CHANNEL, ev.Sender, this.LocalPlayer.ActorNumber);
+                this.onVoiceFrameEvent(ev[(byte)ParameterCode.CustomEventContent], VOICE_CHANNEL, ev.Sender, this.LocalPlayer.ActorNumber);
             }
             else
             {
@@ -75,10 +77,11 @@ namespace Photon.Voice
             }
         }
 
+
         internal void onVoiceFrameEvent(object content0, int channelId, int playerId, int localPlayerId)
         {
-            byte[] content;
-            int contentLength;
+            byte[] content = null;
+            int contentLength = 0;
             int sliceOffset = 0;
             ByteArraySlice slice = content0 as ByteArraySlice;
             if (slice != null)
@@ -107,24 +110,19 @@ namespace Photon.Voice
                 {
                     flags = (FrameFlags)content[3];
                 }
-                byte frNumber = evNumber;
-                if (dataOffset > 4)
-                {
-                    frNumber = content[4];
-                }
 
                 FrameBuffer buffer;
                 if (slice != null)
                 {
-                    buffer = new FrameBuffer(slice.Buffer, slice.Offset + dataOffset, contentLength - dataOffset, flags, frNumber, slice);
+                    buffer = new FrameBuffer(slice.Buffer, slice.Offset + dataOffset, contentLength - dataOffset, flags, () => slice.Release());
                 }
                 else
                 {
-                    buffer = new FrameBuffer(content, dataOffset, contentLength - dataOffset, flags, frNumber, null);
+                    buffer = new FrameBuffer(content, dataOffset, contentLength - dataOffset, flags, null);
                 }
+                
 
-                this.voiceClient.onFrame(playerId, voiceId, evNumber, ref buffer, playerId == localPlayerId);
-                buffer.Release();
+                this.voiceClient.onFrame(channelId, playerId, voiceId, evNumber, buffer, playerId == localPlayerId);
             }
         }
     }

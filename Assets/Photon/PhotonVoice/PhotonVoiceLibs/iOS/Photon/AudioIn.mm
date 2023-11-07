@@ -18,8 +18,7 @@ reason:[NSString stringWithFormat:@"%s (%i)", operation, (int)error] userInfo:nu
 }                                                                                       \
 } while (0)
 
-const int CAPTURE_BUFFER_SIZE = 23040; // 60 ms of frames in bytes at 48000Hz
-const int BUFFER_SIZE = 4096000; // ring buffer
+const int BUFFER_SIZE = 4096000;
 static NSMutableSet* handles = [[NSMutableSet alloc] init];
 
 struct CallbackData {
@@ -28,17 +27,15 @@ struct CallbackData {
     float* ringBuffer;
     int ringWritePos;
     int ringReadPos;
-    AudioBufferList bufferList;
-
+    
     int pushHostID;
     Photon_IOSAudio_PushCallback pushCallback;
     
     CallbackData(): rioUnit(NULL), audioChainIsBeingReconstructed(false),
-    ringBuffer(NULL), ringWritePos(0), ringReadPos(0), bufferList(), pushHostID(0), pushCallback(NULL) {}
+    ringBuffer(NULL), ringWritePos(0), ringReadPos(0), pushHostID(0), pushCallback(NULL) {}
     
     ~CallbackData() {
         free(ringBuffer);
-        free(bufferList.mBuffers[0].mData);
     }
 };
 
@@ -49,7 +46,7 @@ struct CallbackData {
     AVAudioSessionMode sessionMode;
     AVAudioSessionCategoryOptions sessionCategoryOptions;
 }
-- (void)setup;
+- (void)setupHandlers;
 - (void)storeCategory:(int)category mode:(int)mode options:(int)options;
 - (void)setSessionCategory;
 - (void)setupAudioSession;
@@ -59,16 +56,13 @@ struct CallbackData {
 
 
 Photon_Audio_In* Photon_Audio_In_CreateReader(int sessionCategory, int sessionMode, int sessionCategoryOptions) {
-    NSLog(@"[PV] [AI] CreateReader");
     Photon_Audio_In* handle = [[Photon_Audio_In alloc] init];
     [handle storeCategory:sessionCategory mode:sessionMode options:sessionCategoryOptions];
-
     handle->cd.ringBuffer = (float*)malloc(sizeof(float)*BUFFER_SIZE);
-
     @synchronized(handles) {
         [handles addObject:handle];
     }
-    [handle setup];
+    [handle setupHandlers];
     
     [handle setupAudioChain];
     [handle startIOUnit];
@@ -102,18 +96,14 @@ bool Photon_Audio_In_Read(Photon_Audio_In* handle, float* buf, int len) {
 }
 
 Photon_Audio_In* Photon_Audio_In_CreatePusher(int hostID, Photon_IOSAudio_PushCallback callback, int sessionCategory, int sessionMode, int sessionCategoryOptions) {
-    NSLog(@"[PV] [AI] CreatePusher");
     Photon_Audio_In* handle = [[Photon_Audio_In alloc] init];
     [handle storeCategory:sessionCategory mode:sessionMode options:sessionCategoryOptions];
-
-    handle->cd.ringBuffer = (float*)malloc(sizeof(float)*BUFFER_SIZE);
-
     handle->cd.pushCallback = callback;
     handle->cd.pushHostID = hostID;
     @synchronized(handles) {
         [handles addObject:handle];
     }
-    [handle setup];
+    [handle setupHandlers];
     
     [handle setupAudioChain];
     [handle startIOUnit];
@@ -128,7 +118,6 @@ void Photon_Audio_In_Reset(Photon_Audio_In* handle) {
 }
 
 void Photon_Audio_In_Destroy(Photon_Audio_In* handle) {
-    NSLog(@"[PV] [AI] Destroy");
     [handle stopIOUnit];
     // remove reference to the handle in the same queue as used for push callback to make sure that all pending buffers processed before handle destroyed
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -138,27 +127,18 @@ void Photon_Audio_In_Destroy(Photon_Audio_In* handle) {
     });
 }
 
-
 // Render callback function
-static OSStatus    performInput (void                         *inRefCon,
-                                  AudioUnitRenderActionFlags  *ioActionFlags,
-                                  const AudioTimeStamp        *inTimeStamp,
-                                  UInt32                       inBusNumber,
-                                  UInt32                       inNumberFrames,
-                                  AudioBufferList             */*ioData*/)
+static OSStatus    performRender (void                         *inRefCon,
+                                  AudioUnitRenderActionFlags     *ioActionFlags,
+                                  const AudioTimeStamp         *inTimeStamp,
+                                  UInt32                         inBusNumber,
+                                  UInt32                         inNumberFrames,
+                                  AudioBufferList              *ioData)
 {
     OSStatus err = noErr;
     CallbackData& cd = *((CallbackData*)inRefCon);
-
     if (cd.audioChainIsBeingReconstructed == NO)
     {
-        const int currBuffSize = inNumberFrames * sizeof(float);
-        cd.bufferList.mBuffers[0].mDataByteSize = currBuffSize;
-        if (currBuffSize > BUFFER_SIZE) {
-            NSLog(@"ERROR: currBufSize %d > MAX_BUF_SIZE %d\n", currBuffSize);
-            return kAudio_ParamError;
-        }
-        AudioBufferList *ioData = &cd.bufferList;
         // we are calling AudioUnitRender on the input bus of AURemoteIO
         // this will store the audio data captured by the microphone in ioData
         err = AudioUnitRender(cd.rioUnit, ioActionFlags, inTimeStamp, 1, inNumberFrames, ioData);
@@ -183,26 +163,15 @@ static OSStatus    performInput (void                         *inRefCon,
                 cd.ringWritePos += inNumberFrames;
             }
         }
-
+        
         // mute output buffer
         for (UInt32 i=0; i<ioData->mNumberBuffers; ++i)
             memset(ioData->mBuffers[i].mData, 0, ioData->mBuffers[i].mDataByteSize);
-
+        
     }
-
+    
     return err;
 }
-
-static OSStatus    performRender (void                         *inRefCon,
-                                  AudioUnitRenderActionFlags   *ioActionFlags,
-                                  const AudioTimeStamp         *inTimeStamp,
-                                  UInt32                        inBusNumber,
-                                  UInt32                        inNumberFrames,
-                                  AudioBufferList              *ioData)
-{
-    return noErr;
-}
-
 
 @implementation Photon_Audio_In
 
@@ -218,7 +187,7 @@ static OSStatus    performRender (void                         *inRefCon,
         case 6: self->sessionCategory = AVAudioSessionCategoryMultiRoute; break;
         default: throw [NSException exceptionWithName:@"PhotonAudioException" reason:[NSString stringWithFormat:@"Unknown session category %d", category] userInfo:nullptr];
     }
-
+    
     switch (mode)
     {
         case 0: self->sessionMode = AVAudioSessionModeDefault; break;
@@ -242,7 +211,7 @@ static OSStatus    performRender (void                         *inRefCon,
         NSLog(@"[PV] [AI] Session interrupted > --- %s ---\n", theInterruptionType == AVAudioSessionInterruptionTypeBegan ? "Begin Interruption" : "End Interruption");
         
         if (theInterruptionType == AVAudioSessionInterruptionTypeBegan) {
-            // do not stop recording
+            // do not stop recording            
         }
         
         if (theInterruptionType == AVAudioSessionInterruptionTypeEnded) {
@@ -314,13 +283,8 @@ static OSStatus    performRender (void                         *inRefCon,
     cd.audioChainIsBeingReconstructed = NO;
 }
 
-- (void)setup
+- (void)setupHandlers
 {
-    cd.bufferList.mNumberBuffers = 1;
-    cd.bufferList.mBuffers[0].mData = malloc(CAPTURE_BUFFER_SIZE);
-    cd.bufferList.mBuffers[0].mDataByteSize = CAPTURE_BUFFER_SIZE;
-    cd.bufferList.mBuffers[0].mNumberChannels = 2;
-    
     AVAudioSession *sessionInstance = [AVAudioSession sharedInstance];
     // add interruption handler
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -337,7 +301,7 @@ static OSStatus    performRender (void                         *inRefCon,
     // if media services are reset, we need to rebuild our audio chain
     [[NSNotificationCenter defaultCenter]    addObserver:self
                                                 selector:@selector(handleMediaServerReset:)
-                                                    name:AVAudioSessionMediaServicesWereResetNotification
+                                                    name:    AVAudioSessionMediaServicesWereResetNotification
                                                   object:sessionInstance];
 }
 
@@ -347,7 +311,6 @@ static OSStatus    performRender (void                         *inRefCon,
     AVAudioSession *sessionInstance = [AVAudioSession sharedInstance];
     
     NSError *error = nil;
-    NSLog(@"[PV] [AI] Current category = %@, mode = %@, options = %lu", sessionInstance.category, sessionInstance.mode, (unsigned long)sessionInstance.categoryOptions);
     NSLog(@"[PV] [AI] Setting category = %@, mode = %@, options = %lu", self->sessionCategory, self->sessionMode, (unsigned long)self->sessionCategoryOptions);
     [sessionInstance setCategory:self->sessionCategory
                             mode:self->sessionMode
@@ -378,14 +341,14 @@ static OSStatus    performRender (void                         *inRefCon,
         [[AVAudioSession sharedInstance] setActive:YES error:&error];
         XThrowIfError((OSStatus)error.code, "couldn't set session active");
     }
-
+    
     catch (NSException* e) {
         NSLog(@"[PV] [AI] Error returned from setupAudioSession: %@", e);
     }
     catch (...) {
         NSLog(@"[PV] [AI] Unknown error returned from setupAudioSession");
     }
-
+    
     NSLog(@"[PV] [AI] AudioSession successfully set up.");
     return;
 }
@@ -441,23 +404,16 @@ static OSStatus    performRender (void                         *inRefCon,
         // Get the property value back from AURemoteIO. We are going to use this value to allocate buffers accordingly
         UInt32 propSize = sizeof(UInt32);
         XThrowIfError(AudioUnitGetProperty(cd.rioUnit, kAudioUnitProperty_MaximumFramesPerSlice, kAudioUnitScope_Global, 0, &maxFramesPerSlice, &propSize), "couldn't get max frames per slice on AURemoteIO");
-               
-        // Starting with iPhone14, an input callback is required for capture.
-        // https://stackoverflow.com/questions/74060956/audiounitrender-error-kaudiouniterr-cannotdoincurrentcontext-on-iphone-14-only/74765449
+        
+        // We need references to certain data in the render callback
+        // This simple struct is used to hold that information
         
         // Set the render callback on AURemoteIO
-        // The render callback doesn't do anything. Without it, the capture still works but multiple errors are logged: from AU (0x111672c40): auou/vpio/appl, render err: -1 / throwing -1
         AURenderCallbackStruct renderCallback;
         renderCallback.inputProc = performRender;
         renderCallback.inputProcRefCon = &cd;
         XThrowIfError(AudioUnitSetProperty(cd.rioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, 0, &renderCallback, sizeof(renderCallback)), "couldn't set render callback on AURemoteIO");
         
-        // Set the input capture callback on AURemoteIO
-        AURenderCallbackStruct inputCallback;
-        inputCallback.inputProc = performInput;
-        inputCallback.inputProcRefCon = &cd;
-        XThrowIfError(AudioUnitSetProperty(cd.rioUnit, kAudioOutputUnitProperty_SetInputCallback, kAudioUnitScope_Global, 1, &inputCallback,sizeof(inputCallback)), "couldn't set capture callback on AURemoteIO");
-                
         // Initialize the AURemoteIO instance
         
         // from https://chromium.googlesource.com/external/webrtc/+/9eeb6240c93efe2219d4d6f4cf706030e00f64d7/webrtc/modules/audio_device/ios/voice_processing_audio_unit.mm
@@ -518,16 +474,6 @@ static OSStatus    performRender (void                         *inRefCon,
     OSStatus err = AudioOutputUnitStop(cd.rioUnit);
     if (err) NSLog(@"[PV] [AI] couldn't stop AURemoteIO: %d", (int)err);
     else NSLog(@"[PV] [AI] AURemoteIO successfully stopped.");
-
-    AVAudioSession *sessionInstance = [AVAudioSession sharedInstance];
-    NSError *error = nil;
-    NSLog(@"[PV] [AI] Current category = %@, mode = %@, options = %lu", sessionInstance.category, sessionInstance.mode, (unsigned long)sessionInstance.categoryOptions);
-    [sessionInstance setCategory:AVAudioSessionCategoryAmbient
-                            mode:AVAudioSessionModeDefault
-                         options:AVAudioSessionCategoryOptionMixWithOthers
-                           error:&error];
-    NSLog(@"[PV] [AI] Reset to default category = %@, mode = %@, options = %lu", sessionInstance.category, sessionInstance.mode, (unsigned long)sessionInstance.categoryOptions);
-
     return err;
 }
 

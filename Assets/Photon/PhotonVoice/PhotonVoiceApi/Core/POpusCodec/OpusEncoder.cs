@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using POpusCodec.Enums;
-using Photon.Voice;
 using System.Runtime.InteropServices;
 
 namespace POpusCodec
@@ -12,8 +13,7 @@ namespace POpusCodec
         {
             get
             {
-                var v = Marshal.PtrToStringAnsi(Wrapper.opus_get_version_string());
-                return (v == null || v == "" ? "?" : v) + (Wrapper.AsyncAPI ? " (Async)" : "");
+                return Marshal.PtrToStringAnsi(Wrapper.opus_get_version_string());
             }
         }
     }
@@ -22,17 +22,17 @@ namespace POpusCodec
     {
         public const int BitrateMax = -1;
 
-        private IntPtr handle = IntPtr.Zero;
+        private IntPtr _handle = IntPtr.Zero;
         private const int RecommendedMaxPacketSize = 4000;
-        private int frameSamples = 960;
-        private SamplingRate inputSamplingRate = SamplingRate.Sampling48000;
-        private Channels channels = Channels.Stereo;
-
+        private int _frameSizePerChannel = 960;
+        private SamplingRate _inputSamplingRate = SamplingRate.Sampling48000;
+        private Channels _inputChannels = Channels.Stereo;
+        
         public SamplingRate InputSamplingRate
         {
             get
             {
-                return inputSamplingRate;
+                return _inputSamplingRate;
             }
         }
 
@@ -40,7 +40,7 @@ namespace POpusCodec
         {
             get
             {
-                return channels;
+                return _inputChannels;
             }
         }
 
@@ -51,14 +51,14 @@ namespace POpusCodec
         private Delay _encoderDelay = Delay.Delay20ms;
 
         /// <summary>
-        /// Using a duration of less than 10 ms will prevent the encoder from using the LPC or hybrid modes.
+        /// Using a duration of less than 10 ms will prevent the encoder from using the LPC or hybrid modes. 
         /// </summary>
         public Delay EncoderDelay
         {
             set
             {
                 _encoderDelay = value;
-                frameSamples = (int)((((int)inputSamplingRate) / 1000) * ((decimal)_encoderDelay) / 2);
+                _frameSizePerChannel = (int)((((int)_inputSamplingRate) / 1000) * ((decimal)_encoderDelay) / 2);
             }
             get
             {
@@ -70,7 +70,7 @@ namespace POpusCodec
         {
             get
             {
-                return frameSamples;
+                return _frameSizePerChannel;
             }
         }
 
@@ -78,11 +78,11 @@ namespace POpusCodec
         {
             get
             {
-                return Wrapper.get_opus_encoder_ctl(handle, OpusCtlGetRequest.Bitrate);
+                return Wrapper.get_opus_encoder_ctl(_handle, OpusCtlGetRequest.Bitrate);
             }
             set
             {
-                Wrapper.set_opus_encoder_ctl(handle, OpusCtlSetRequest.Bitrate, value);
+                Wrapper.set_opus_encoder_ctl(_handle, OpusCtlSetRequest.Bitrate, value);
             }
         }
 
@@ -90,11 +90,11 @@ namespace POpusCodec
         {
             get
             {
-                return (Bandwidth)Wrapper.get_opus_encoder_ctl(handle, OpusCtlGetRequest.MaxBandwidth);
+                return (Bandwidth)Wrapper.get_opus_encoder_ctl(_handle, OpusCtlGetRequest.MaxBandwidth);
             }
             set
             {
-                Wrapper.set_opus_encoder_ctl(handle, OpusCtlSetRequest.MaxBandwidth, (int)value);
+                Wrapper.set_opus_encoder_ctl(_handle, OpusCtlSetRequest.MaxBandwidth, (int)value);
             }
         }
 
@@ -102,11 +102,11 @@ namespace POpusCodec
         {
             get
             {
-                return (Complexity)Wrapper.get_opus_encoder_ctl(handle, OpusCtlGetRequest.Complexity);
+                return (Complexity)Wrapper.get_opus_encoder_ctl(_handle, OpusCtlGetRequest.Complexity);
             }
             set
             {
-                Wrapper.set_opus_encoder_ctl(handle, OpusCtlSetRequest.Complexity, (int)value);
+                Wrapper.set_opus_encoder_ctl(_handle, OpusCtlSetRequest.Complexity, (int)value);
             }
         }
 
@@ -114,11 +114,11 @@ namespace POpusCodec
         {
             get
             {
-                return Wrapper.get_opus_encoder_ctl(handle, OpusCtlGetRequest.PacketLossPercentage);
+                return Wrapper.get_opus_encoder_ctl(_handle, OpusCtlGetRequest.PacketLossPercentage);
             }
             set
             {
-                Wrapper.set_opus_encoder_ctl(handle, OpusCtlSetRequest.PacketLossPercentage, value);
+                Wrapper.set_opus_encoder_ctl(_handle, OpusCtlSetRequest.PacketLossPercentage, value);
             }
         }
 
@@ -126,11 +126,11 @@ namespace POpusCodec
         {
             get
             {
-                return (SignalHint)Wrapper.get_opus_encoder_ctl(handle, OpusCtlGetRequest.Signal);
+                return (SignalHint)Wrapper.get_opus_encoder_ctl(_handle, OpusCtlGetRequest.Signal);
             }
             set
             {
-                Wrapper.set_opus_encoder_ctl(handle, OpusCtlSetRequest.Signal, (int)value);
+                Wrapper.set_opus_encoder_ctl(_handle, OpusCtlSetRequest.Signal, (int)value);
             }
         }
 
@@ -138,11 +138,11 @@ namespace POpusCodec
         {
             get
             {
-                return (ForceChannels)Wrapper.get_opus_encoder_ctl(handle, OpusCtlGetRequest.ForceChannels);
+                return (ForceChannels)Wrapper.get_opus_encoder_ctl(_handle, OpusCtlGetRequest.ForceChannels);
             }
             set
             {
-                Wrapper.set_opus_encoder_ctl(handle, OpusCtlSetRequest.ForceChannels, (int)value);
+                Wrapper.set_opus_encoder_ctl(_handle, OpusCtlSetRequest.ForceChannels, (int)value);
             }
         }
 
@@ -150,11 +150,11 @@ namespace POpusCodec
         {
             get
             {
-                return Wrapper.get_opus_encoder_ctl(handle, OpusCtlGetRequest.InbandFec) == 1;
+                return Wrapper.get_opus_encoder_ctl(_handle, OpusCtlGetRequest.InbandFec) == 1;
             }
             set
             {
-                Wrapper.set_opus_encoder_ctl(handle, OpusCtlSetRequest.InbandFec, value ? 1 : 0);
+                Wrapper.set_opus_encoder_ctl(_handle, OpusCtlSetRequest.InbandFec, value ? 1 : 0);
             }
         }
 
@@ -162,11 +162,11 @@ namespace POpusCodec
         {
             get
             {
-                return Wrapper.get_opus_encoder_ctl(handle, OpusCtlGetRequest.PacketLossPercentage);
+                return Wrapper.get_opus_encoder_ctl(_handle, OpusCtlGetRequest.PacketLossPercentage);
             }
             set
             {
-                Wrapper.set_opus_encoder_ctl(handle, OpusCtlSetRequest.PacketLossPercentage, value);
+                Wrapper.set_opus_encoder_ctl(_handle, OpusCtlSetRequest.PacketLossPercentage, value);
             }
         }
 
@@ -174,11 +174,11 @@ namespace POpusCodec
         {
             get
             {
-                return Wrapper.get_opus_encoder_ctl(handle, OpusCtlGetRequest.VBRConstraint) == 0;
+                return Wrapper.get_opus_encoder_ctl(_handle, OpusCtlGetRequest.VBRConstraint) == 0;
             }
             set
             {
-                Wrapper.set_opus_encoder_ctl(handle, OpusCtlSetRequest.VBRConstraint, value ? 0 : 1);
+                Wrapper.set_opus_encoder_ctl(_handle, OpusCtlSetRequest.VBRConstraint, value ? 0 : 1);
             }
         }
 
@@ -186,11 +186,11 @@ namespace POpusCodec
         {
             get
             {
-                return Wrapper.get_opus_encoder_ctl(handle, OpusCtlGetRequest.Dtx) == 1;
+                return Wrapper.get_opus_encoder_ctl(_handle, OpusCtlGetRequest.Dtx) == 1;
             }
             set
             {
-                Wrapper.set_opus_encoder_ctl(handle, OpusCtlSetRequest.Dtx, value ? 1 : 0);
+                Wrapper.set_opus_encoder_ctl(_handle, OpusCtlSetRequest.Dtx, value ? 1 : 0);
             }
         }
 
@@ -237,11 +237,11 @@ namespace POpusCodec
                 throw new ArgumentOutOfRangeException("encoderDelay", "Must use one of the pre-defined delay values (" + encoderDelay + ")"); ;
             }
 
-            inputSamplingRate = inputSamplingRateHz;
-            channels = numChannels;
-            handle = Wrapper.opus_encoder_create(inputSamplingRateHz, numChannels, applicationType);
-            handles[handle] = this;
-            if (handle == IntPtr.Zero)
+            _inputSamplingRate = inputSamplingRateHz;
+            _inputChannels = numChannels;
+            _handle = Wrapper.opus_encoder_create(inputSamplingRateHz, numChannels, applicationType);
+
+            if (_handle == IntPtr.Zero)
             {
                 throw new OpusException(OpusStatusCode.AllocFail, "Memory was not allocated for the encoder");
             }
@@ -252,59 +252,31 @@ namespace POpusCodec
             PacketLossPercentage = 30;
         }
 
-        // async Encoder support
-        [MonoPInvokeCallbackAttribute(typeof(Action<IntPtr, IntPtr, int>))]
-        static public void DataCallbackStatic(IntPtr handle, IntPtr p, int count)
+        public ArraySegment<byte> Encode(float[] pcmSamples)
         {
-            if (handles.TryGetValue(handle, out var obj))
-            {
-                obj.dataCallback(p, count);
-            }
+            int size = Wrapper.opus_encode(_handle, pcmSamples, _frameSizePerChannel, writePacket);
+
+            if (size <= 1) //DTX. Negative already handled at this point
+                return EmptyBuffer;
+            else
+                return new ArraySegment<byte>(writePacket, 0, size);
         }
 
-        static public Dictionary<IntPtr, OpusEncoder> handles = new Dictionary<IntPtr, OpusEncoder>();
-        private byte[] bufOut;
-        void dataCallback(IntPtr p, int count)
+        public ArraySegment<byte> Encode(short[] pcmSamples)
         {
-            if (Output != null)
-            {
-                if (bufOut == null || bufOut.Length < count)
-                {
-                    bufOut = new byte[count];
-                }
-                Marshal.Copy(p, bufOut, 0, count);
-                Output(new ArraySegment<byte>(bufOut, 0, count), 0);
-            }
-        }
-        // async Encoder support
-
-        public Action<ArraySegment<byte>, Photon.Voice.FrameFlags> Output; // WebGL worker support
-
-        public void Encode(float[] pcmSamples)
-        {
-            int size = Wrapper.opus_encode(handle, pcmSamples, frameSamples, writePacket);
-            if (size <= 1) //DTX. Negative already handled at this point. For WebGL, size == 0 because data is returned via callback.
-                return;
-
-            Output(new ArraySegment<byte>(writePacket, 0, size), 0);
-        }
-
-        public void Encode(short[] pcmSamples)
-        {
-            int size = Wrapper.opus_encode(handle, pcmSamples, frameSamples, writePacket);
-            if (size <= 1) //DTX. Negative already handled at this point. For WebGL, size == 0 because data is returned via callback.
-                return;
-
-            Output(new ArraySegment<byte>(writePacket, 0, size), 0);
+            int size = Wrapper.opus_encode(_handle, pcmSamples, _frameSizePerChannel, writePacket);
+            if (size <= 1) //DTX. Negative already handled at this point
+                return EmptyBuffer;
+            else
+                return new ArraySegment<byte>(writePacket, 0, size);
         }
 
         public void Dispose()
         {
-            if (handle != IntPtr.Zero)
+            if (_handle != IntPtr.Zero)
             {
-                handles.Remove(handle);
-                Wrapper.opus_encoder_destroy(handle);
-                handle = IntPtr.Zero;
+                Wrapper.opus_encoder_destroy(_handle);
+                _handle = IntPtr.Zero;
             }
         }
     }

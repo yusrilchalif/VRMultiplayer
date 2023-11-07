@@ -13,7 +13,7 @@ using System;
 namespace Photon.Voice
 {
     /// <summary>
-    /// Adapter base reading data from <see cref="IDataReader{T}.Read"></see> and pushing it to <see cref="LocalVoice"></see>.
+    /// Adapter base class to move data by reading from <see cref="IDataReader.Read"></see> and pushing to <see cref="LocalVoice"></see>.
     /// </summary>
     /// <remarks>
     /// Use this with a LocalVoice of same T type.
@@ -41,23 +41,48 @@ namespace Photon.Voice
     }
 
     /// <summary>
-    /// <see cref="BufferReaderPushAdapter{T}"></see> implementation using asynchronous <see cref="LocalVoiceFramed{T}.PushDataAsync"></see>.
+    /// Simple <see cref="BufferReaderPushAdapterBase"></see> implementation using a single buffer, using synchronous <see cref="LocalVoice.PushData"></see>
     /// </summary>
-    /// <remarks>
+    public class BufferReaderPushAdapter<T> : BufferReaderPushAdapterBase<T>
+    {
+        protected T[] buffer;
+
+        /// <summary>Create a new BufferReaderPushAdapter instance</summary>
+        /// <param name="localVoice">LocalVoice instance to push data to.</param>
+        /// <param name="reader">DataReader to read from.</param>
+        public BufferReaderPushAdapter(LocalVoice localVoice, IDataReader<T> reader) : base(reader)
+        {
+            // any buffer will work but only of localVoice.FrameSize avoids additional processing
+            buffer = new T[((LocalVoiceFramed<T>)localVoice).FrameSize];
+        }
+
+        public override void Service(LocalVoice localVoice)
+        {
+            while (this.reader.Read(this.buffer))
+            {
+                ((LocalVoiceFramed<T>)localVoice).PushData(this.buffer);
+            }
+        }
+    }
+
+    /// <summary>
+    /// <see cref="BufferReaderPushAdapter"></see> implementation using asynchronous <see cref="LocalVoice.PushDataAsync"></see>.
+    /// </summary>
     /// Acquires a buffer from pool before each Read, releases buffer after last Read (brings Acquire/Release overhead).
-    /// Expects localVoice to be a <see cref="LocalVoiceFramed{T}"></see> of same T.
-    /// </remarks>
+    /// 
+    /// Expects localVoice to be a LocalVoiceFramed<T> of same T.
     public class BufferReaderPushAdapterAsyncPool<T> : BufferReaderPushAdapterBase<T>
     {
         /// <summary>Create a new BufferReaderPushAdapter instance</summary>
+        /// <param name="localVoice">LocalVoice instance to push data to.</param>
         /// <param name="reader">DataReader to read from.</param>
-        public BufferReaderPushAdapterAsyncPool(IDataReader<T> reader) : base(reader) { }
+        public BufferReaderPushAdapterAsyncPool(LocalVoice localVoice, IDataReader<T> reader) : base(reader) { }
 
         /// <summary>Do the actual data read/push.</summary>
-        /// <param name="localVoice">LocalVoice instance to push data to. Must be a <see cref="LocalVoiceFramed{T}"></see> of same T.</param>
+        /// <param name="localVoice">LocalVoice instance to push data to. Must be a LocalVoiceFramed<T> of same T.</param>
         public override void Service(LocalVoice localVoice)
         {
-            var v = (LocalVoiceFramed<T>)localVoice;
+            var v = ((LocalVoiceFramed<T>)localVoice);
             T[] buf = v.BufferFactory.New();
             while (this.reader.Read(buf))
             {
@@ -69,38 +94,66 @@ namespace Photon.Voice
         }
     }
 
+
     /// <summary>
-    /// <see cref="BufferReaderPushAdapter{T}"></see> implementation using asynchronous <see cref="LocalVoiceFramed{T}.PushDataAsync"></see>, converting float samples to short.
+    /// <see cref="BufferReaderPushAdapter"></see> implementation using asynchronous <see cref="LocalVoice.PushDataAsync"></see> and data copy.
     /// </summary>
-    /// <remarks>
-    /// This adapter works exactly like <see cref="BufferReaderPushAdapterAsyncPool{T}"></see>, but it converts float samples to short.
+    /// Reads data to preallocated buffer, copies it to buffer from pool before pushing.
+    /// Compared with <see cref="BufferReaderPushAdapterAsyncPool">, this avoids one pool Acquire/Release cycle at the cost
+    /// of a buffer copy.
+    /// 
+    /// Expects localVoice to be a LocalVoiceFramed<T> of same T.
+    public class BufferReaderPushAdapterAsyncPoolCopy<T> : BufferReaderPushAdapterBase<T>
+    {
+        protected T[] buffer;
+
+        /// <summary>Create a new BufferReaderPushAdapter instance</summary>
+        /// <param name="localVoice">LocalVoice instance to push data to.</param>
+        /// <param name="reader">DataReader to read from.</param>
+        public BufferReaderPushAdapterAsyncPoolCopy(LocalVoice localVoice, IDataReader<T> reader) : base(reader)
+        {
+            buffer = new T[((LocalVoiceFramedBase)localVoice).FrameSize];
+        }
+
+        /// <summary>Do the actual data read/push.</summary>
+        /// <param name="localVoice">LocalVoice instance to push data to. Must be a LocalVoiceFramed<T> of same T.</param>
+        public override void Service(LocalVoice localVoice)
+        {
+            while (this.reader.Read(buffer))
+            {
+                var v = ((LocalVoiceFramed<T>)localVoice);
+                var buf = v.BufferFactory.New();
+                Array.Copy(buffer, buf, buffer.Length);
+                v.PushDataAsync(buf);
+            }
+        }
+    }
+
+    /// <summary>
+    /// <see cref="BufferReaderPushAdapter"></see> implementation using asynchronous <see cref="LocalVoice.PushDataAsync"></see>, converting float samples to short.
+    /// </summary>
+    /// This adapter works exactly like <see cref="BufferReaderPushAdapterAsyncPool"></see>, but it converts float samples to short.
     /// Acquires a buffer from pool before each Read, releases buffer after last Read.
-    ///
-    /// Expects localVoice to be a <see cref="LocalVoiceFramed{T}"></see> of same T.
-    /// </remarks>
+    /// 
+    /// Expects localVoice to be a LocalVoiceFramed<T> of same T.
     public class BufferReaderPushAdapterAsyncPoolFloatToShort : BufferReaderPushAdapterBase<float>
     {
         float[] buffer;
 
         /// <summary>Create a new BufferReaderPushAdapter instance</summary>
+        /// <param name="localVoice">LocalVoice instance to push data to.</param>
         /// <param name="reader">DataReader to read from.</param>
-        public BufferReaderPushAdapterAsyncPoolFloatToShort(IDataReader<float> reader) : base(reader)
+        public BufferReaderPushAdapterAsyncPoolFloatToShort(LocalVoice localVoice, IDataReader<float> reader) : base(reader)
         {
-            buffer = new float[0];
+            buffer = new float[((LocalVoiceFramed<short>)localVoice).FrameSize];
         }
 
         /// <summary>Do the actual data read/push.</summary>
-        /// <param name="localVoice">LocalVoice instance to push data to. Must be a <see cref="LocalVoiceFramed{T}"></see> of same T.</param>
+        /// <param name="localVoice">LocalVoice instance to push data to. Must be a LocalVoiceFramed<T> of same T.</param>
         public override void Service(LocalVoice localVoice)
         {
             var v = ((LocalVoiceFramed<short>)localVoice);
             short[] buf = v.BufferFactory.New();
-
-            if (buffer.Length != buf.Length)
-            {
-                buffer = new float[buf.Length];
-            }
-
             while (this.reader.Read(buffer))
             {
                 AudioUtil.Convert(buffer, buf, buf.Length);
@@ -113,34 +166,30 @@ namespace Photon.Voice
     }
 
     /// <summary>
-    /// <see cref="BufferReaderPushAdapter{T}"></see> implementation using asynchronous <see cref="LocalVoiceFramed{T}.PushDataAsync"></see>, converting short samples to float.
+    /// <see cref="BufferReaderPushAdapter"></see> implementation using asynchronous <see cref="LocalVoice.PushDataAsync"></see>, converting short samples to float.
     /// </summary>
-    /// This adapter works exactly like <see cref="BufferReaderPushAdapterAsyncPool{T}"></see>, but it converts short samples to float.
+    /// This adapter works exactly like <see cref="BufferReaderPushAdapterAsyncPool"></see>, but it converts short samples to float.
     /// Acquires a buffer from pool before each Read, releases buffer after last Read.
-    ///
-    /// Expects localVoice to be a <see cref="LocalVoiceFramed{T}"></see> of same T.
+    /// 
+    /// Expects localVoice to be a LocalVoiceFramed<T> of same T.
     public class BufferReaderPushAdapterAsyncPoolShortToFloat : BufferReaderPushAdapterBase<short>
     {
-        short[] buffer = new short[0];
+        short[] buffer;
 
         /// <summary>Create a new BufferReaderPushAdapter instance</summary>
+        /// <param name="localVoice">LocalVoice instance to push data to.</param>
         /// <param name="reader">DataReader to read from.</param>
-        public BufferReaderPushAdapterAsyncPoolShortToFloat(IDataReader<short> reader) : base(reader)
+        public BufferReaderPushAdapterAsyncPoolShortToFloat(LocalVoice localVoice, IDataReader<short> reader) : base(reader)
         {
+            buffer = new short[((LocalVoiceFramed<float>)localVoice).FrameSize];
         }
 
         /// <summary>Do the actual data read/push.</summary>
-        /// <param name="localVoice">LocalVoice instance to push data to. Must be a <see cref="LocalVoiceFramed{T}"></see> of same T.</param>
+        /// <param name="localVoice">LocalVoice instance to push data to. Must be a LocalVoiceFramed<T> of same T.</param>
         public override void Service(LocalVoice localVoice)
         {
             var v = ((LocalVoiceFramed<float>)localVoice);
             float[] buf = v.BufferFactory.New();
-
-            if (buffer.Length != buf.Length)
-            {
-                buffer = new short[buf.Length];
-            }
-
             while (this.reader.Read(buffer))
             {
                 AudioUtil.Convert(buffer, buf, buf.Length);

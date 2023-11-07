@@ -64,7 +64,7 @@ namespace Photon.Pun
     public static partial class PhotonNetwork
     {
         /// <summary>Version number of PUN. Used in the AppVersion, which separates your playerbase in matchmaking.</summary>
-        public const string PunVersion = "2.43";
+        public const string PunVersion = "2.33.3";
 
         /// <summary>Version number of your game. Setting this updates the AppVersion, which separates your playerbase in matchmaking.</summary>
         /// <remarks>
@@ -398,16 +398,6 @@ namespace Photon.Pun
             }
         }
 
-        /// <summary>
-        /// Used to enable reaction to CloseConnection events. Default: false.
-        /// </summary>
-        /// <remarks>
-        /// Using CloseConnection is a security risk, as exploiters can send the event as Master Client.
-        ///
-        /// In best case, a game would implement this "disconnect others" independently from PUN in game-code
-        /// with some security checks.
-        /// </remarks>
-        public static bool EnableCloseConnection = false;
 
         /// <summary>
         /// The minimum difference that a Vector2 or Vector3(e.g. a transforms rotation) needs to change before we send it via a PhotonView's OnSerialize/ObservingComponent.
@@ -1025,34 +1015,19 @@ namespace Photon.Pun
         /// </summary>
         static PhotonNetwork()
         {
-            #if !UNITY_EDITOR
-            StaticReset();  // in builds, we just reset/init the client once
-            #else
-
-                #if UNITY_2019_4_OR_NEWER
-                if (NetworkingClient == null)
-                {
-                    NetworkingClient = new LoadBalancingClient();
-                }
-                #else
-                StaticReset();  // in OLDER unity editor versions there is no RuntimeInitializeOnLoadMethod, so call reset
-                #endif
-
+            #if !UNITY_EDITOR || (UNITY_EDITOR && !UNITY_2019_4_OR_NEWER)
+            StaticReset();
             #endif
         }
 
-        #if UNITY_EDITOR && UNITY_2019_4_OR_NEWER
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+        #if UNITY_2019_4_OR_NEWER && UNITY_EDITOR
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         #endif
         private static void StaticReset()
         {
             #if UNITY_EDITOR
-            if (!EditorApplication.isPlayingOrWillChangePlaymode)
-            {
-                return;
-            }
+            if (!EditorApplication.isPlayingOrWillChangePlaymode) return;
             #endif
-
             // This clear is for when Domain Reloading is disabled. Typically will already be empty.
             monoRPCMethodsCache.Clear();
 
@@ -1152,9 +1127,7 @@ namespace Photon.Pun
 
 
             NetworkingClient.LoadBalancingPeer.TransportProtocol = appSettings.Protocol;
-            NetworkingClient.ExpectedProtocol = null;
             NetworkingClient.EnableProtocolFallback = appSettings.EnableProtocolFallback;
-            NetworkingClient.AuthMode = appSettings.AuthMode;
 
 
             IsMessageQueueRunning = true;
@@ -1372,7 +1345,7 @@ namespace Photon.Pun
 
             if (NetworkingClient == null)
             {
-                return; // Suppress error when quitting playmode in the editor
+                return; // Surpress error when quitting playmode in the editor
             }
 
             NetworkingClient.Disconnect();
@@ -1495,19 +1468,13 @@ namespace Photon.Pun
             }
         }
 
-        /// <summary>Request a client to disconnect/kick, which happens if EnableCloseConnection is set to true. Only the master client can do this.</summary>
-        /// <remarks>Only the target player gets this event. That player will disconnect if EnableCloseConnection = true.</remarks>
+        /// <summary>Request a client to disconnect (KICK). Only the master client can do this</summary>
+        /// <remarks>Only the target player gets this event. That player will disconnect automatically, which is what the others will notice, too.</remarks>
         /// <param name="kickPlayer">The Player to kick.</param>
         public static bool CloseConnection(Player kickPlayer)
         {
             if (!VerifyCanUseNetwork())
             {
-                return false;
-            }
-
-            if (!PhotonNetwork.EnableCloseConnection)
-            {
-                Debug.LogError("CloseConnection is disabled. No need to call it.");
                 return false;
             }
 
@@ -1677,7 +1644,7 @@ namespace Photon.Pun
             return NetworkingClient.OpJoinRandomRoom(opParams);
         }
 
-
+        
         /// <summary>
         /// Attempts to join a room that matches the specified filter and creates a room if none found.
         /// </summary>
@@ -1693,10 +1660,10 @@ namespace Photon.Pun
         /// This client's State is set to ClientState.Joining immediately.
         ///
         /// Either IMatchmakingCallbacks.OnJoinedRoom or IMatchmakingCallbacks.OnCreatedRoom gets called.
-        ///
+        /// 
         /// Should the creation on the Master Server, IMatchmakingCallbacks.OnJoinRandomFailed gets called.
         /// Should the "join" on the Game Server fail, IMatchmakingCallbacks.OnJoinRoomFailed gets called.
-        ///
+        /// 
         ///
         /// Check the return value to make sure the operation will be called on the server.
         /// Note: There will be no callbacks if this method returned false.
@@ -3201,12 +3168,11 @@ namespace Photon.Pun
             }
 
 
-            #if UNITY_EDITOR
-            // in the editor, store the settings file as it could not be loaded
-            // unless Unity still imports assets
-            if (UnityEditor.EditorApplication.isUpdating)
+            // in the editor, store the settings file as it's not loaded
+            #if  UNITY_EDITOR
+            // don't save the settings before OnProjectUpdated got called (this hints at an ongoing import/load)
+            if (!PhotonEditorUtils.ProjectChangedWasCalled)
             {
-                EditorApplication.delayCall += delegate { LoadOrCreateSettings(true); };
                 return;
             }
 

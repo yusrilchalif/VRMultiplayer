@@ -28,10 +28,13 @@ namespace Photon.Voice.Unity.UtilityScripts
         private bool autoConnect = true;
 
         [SerializeField]
+        private bool autoTransmit = true;
+        
+        [SerializeField]
         private bool publishUserId = false;
 
         public string RoomName;
-
+        
         private readonly EnterRoomParams enterRoomParams = new EnterRoomParams
         {
             RoomOptions = new RoomOptions()
@@ -39,9 +42,13 @@ namespace Photon.Voice.Unity.UtilityScripts
 
         public bool IsConnected { get { return this.voiceConnection.Client.IsConnected; } }
 
-        private void Start()
-       {
+        private void Awake()
+        {
             this.voiceConnection = this.GetComponent<VoiceConnection>();
+        }
+
+        private void OnEnable()
+        {
             this.voiceConnection.Client.AddCallbackTarget(this);
             if (this.autoConnect)
             {
@@ -49,7 +56,7 @@ namespace Photon.Voice.Unity.UtilityScripts
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             this.voiceConnection.Client.RemoveCallbackTarget(this);
         }
@@ -78,6 +85,14 @@ namespace Photon.Voice.Unity.UtilityScripts
 
         public void OnJoinedRoom()
         {
+            if (this.voiceConnection.PrimaryRecorder == null)
+            {
+                this.voiceConnection.PrimaryRecorder = this.gameObject.AddComponent<Recorder>();
+            }
+            if (this.autoTransmit)
+            {
+                this.voiceConnection.PrimaryRecorder.TransmitEnabled = this.autoTransmit;
+            }
         }
 
         public void OnJoinRandomFailed(short returnCode, string message)
@@ -121,7 +136,7 @@ namespace Photon.Voice.Unity.UtilityScripts
 
         public void OnDisconnected(DisconnectCause cause)
         {
-            if (cause == DisconnectCause.None || cause == DisconnectCause.DisconnectByClientLogic || cause == DisconnectCause.ApplicationQuit)
+            if (cause == DisconnectCause.None || cause == DisconnectCause.DisconnectByClientLogic)
             {
                 return;
             }

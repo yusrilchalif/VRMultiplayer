@@ -1,23 +1,26 @@
-﻿#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_IOS || UNITY_ANDROID || UNITY_WSA
-#define PLATFORM_IS_SUPPORTED
+﻿#if !UNITY_EDITOR && (UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_IOS || UNITY_ANDROID || UNITY_WSA)
+#define WEBRTC_AUDIO_DSP_SUPPORTED_PLATFORM
 #endif
 
+#if UNITY_EDITOR_WIN || UNITY_EDITOR_OSX
+#define WEBRTC_AUDIO_DSP_SUPPORTED_EDITOR
+#endif
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Photon.Voice.Unity
 {
     [RequireComponent(typeof(Recorder))]
-    [AddComponentMenu("Photon Voice/WebRTC Audio DSP")]
     [DisallowMultipleComponent]
-    // Set enabled = false to prevent the processor from being added to the audio pipelene during voice creation.
     public class WebRtcAudioDsp : VoiceComponent
     {
         #region Private Fields
 
         [SerializeField]
         private bool aec = true;
-
+        
         [SerializeField]
         private bool aecHighPass;
 
@@ -25,12 +28,7 @@ namespace Photon.Voice.Unity
         private bool agc = true;
 
         [SerializeField]
-        [Range(0, 90)]
         private int agcCompressionGain = 9;
-
-        [SerializeField]
-        [Range(0, 31)]
-        private int agcTargetLevel = 3;
 
         [SerializeField]
         private bool vad = true;
@@ -38,17 +36,20 @@ namespace Photon.Voice.Unity
         [SerializeField]
         private bool highPass;
 
-        // do not serialize, may be set to true only in runtime
+        [SerializeField]
         private bool bypass;
 
         [SerializeField]
-        private bool noiseSuppression = true;
+        private bool noiseSuppression;
 
         [SerializeField]
         private int reverseStreamDelayMs = 120;
 
         private int reverseChannels;
         private WebRTCAudioProcessor proc;
+
+        private AudioOutCapture ac;
+        private bool started;
 
         private static readonly Dictionary<AudioSpeakerMode, int> channelsMap = new Dictionary<AudioSpeakerMode, int>
         {
@@ -64,8 +65,13 @@ namespace Photon.Voice.Unity
             {AudioSpeakerMode.Prologic, 2}
         };
 
-        private LocalVoiceAudioShort localVoice;
+        private LocalVoice localVoice;
         private int outputSampleRate;
+
+        private Recorder recorder;
+
+        [SerializeField]
+        private bool forceNormalAecInMobile;
 
         #endregion
 
@@ -76,23 +82,45 @@ namespace Photon.Voice.Unity
             get { return this.aec; }
             set
             {
-                if (value != this.aec)
+                if (value == this.aec)
                 {
-                    this.aec = value;
-                    this.applyToProc();
+                    return;
+                }
+                this.aec = value;
+                if (this.proc != null)
+                {
+                    this.proc.AEC = this.aec;
+                    this.SetOutputListener();
                 }
             }
         }
+
+        [Obsolete("Use AEC instead on all platforms, internally according AEC will be used either mobile or not.")]
+        public bool AECMobile // echo control mobile
+        {
+            get { return this.AEC; }
+            set
+            {
+                this.AEC = value;
+            }
+        }
+
+        [Obsolete("Obsolete as it's not recommended to set this to true. https://forum.photonengine.com/discussion/comment/48017/#Comment_48017")]
+        public bool AECMobileComfortNoise;
 
         public bool AecHighPass
         {
             get { return this.aecHighPass; }
             set
             {
-                if (value != this.aecHighPass)
+                if (value == this.aecHighPass)
                 {
-                    this.aecHighPass = value;
-                    this.applyToProc();
+                    return;
+                }
+                this.aecHighPass = value;
+                if (this.proc != null)
+                {
+                    this.proc.AECHighPass = this.aecHighPass;
                 }
             }
         }
@@ -102,11 +130,15 @@ namespace Photon.Voice.Unity
             get { return this.reverseStreamDelayMs; }
             set
             {
-                if (value != this.reverseStreamDelayMs)
+                if (this.reverseStreamDelayMs == value)
                 {
-                    this.reverseStreamDelayMs = value;
-                    this.applyToProc();
+                    return;
                 }
+                this.reverseStreamDelayMs = value;
+                if (this.proc != null)
+                {
+                    this.proc.AECStreamDelayMs = this.reverseStreamDelayMs;
+                } 
             }
         }
 
@@ -115,11 +147,14 @@ namespace Photon.Voice.Unity
             get { return this.noiseSuppression; }
             set
             {
-                if (value != this.noiseSuppression)
+                if (value == this.noiseSuppression)
                 {
-                    this.noiseSuppression = value;
-                    this.applyToProc();
-                    Restart();
+                    return;
+                }
+                this.noiseSuppression = value;
+                if (this.proc != null)
+                {
+                    this.proc.NoiseSuppression = this.noiseSuppression;
                 }
             }
         }
@@ -129,10 +164,14 @@ namespace Photon.Voice.Unity
             get { return this.highPass; }
             set
             {
-                if (value != this.highPass)
+                if (value == this.highPass)
                 {
-                    this.highPass = value;
-                    this.applyToProc();
+                    return;
+                }
+                this.highPass = value;
+                if (this.proc != null)
+                {
+                    this.proc.HighPass = this.highPass;
                 }
             }
         }
@@ -142,10 +181,14 @@ namespace Photon.Voice.Unity
             get { return this.bypass; }
             set
             {
-                if (value != this.bypass)
+                if (value == this.bypass)
                 {
-                    this.bypass = value;
-                    this.applyToProc();
+                    return;
+                }
+                this.bypass = value;
+                if (this.proc != null)
+                {
+                    this.proc.Bypass = this.bypass;
                 }
             }
         }
@@ -155,36 +198,42 @@ namespace Photon.Voice.Unity
             get { return this.agc; }
             set
             {
-                if (value != this.agc)
+                if (value == this.agc)
                 {
-                    this.agc = value;
-                    this.applyToProc();
+                    return;
+                }
+                this.agc = value;
+                if (this.proc != null)
+                {
+                    this.proc.AGC = this.agc;
                 }
             }
         }
 
         public int AgcCompressionGain
         {
-            get { return this.agcCompressionGain; }
-            set
+            get
             {
-                if (value != this.agcCompressionGain)
-                {
-                    this.agcCompressionGain = value;
-                    this.applyToProc();
-                }
+                return this.agcCompressionGain;
             }
-        }
-
-        public int AgcTargetLevel
-        {
-            get { return this.agcTargetLevel; }
             set
             {
-                if (value != this.agcTargetLevel)
+                if (this.agcCompressionGain == value)
                 {
-                    this.agcTargetLevel = value;
-                    this.applyToProc();
+                    return;
+                }
+                if (value < 0 || value > 90)
+                {
+                    if (this.Logger.IsErrorEnabled)
+                    {
+                        this.Logger.LogError("AgcCompressionGain value {0} not in range [0..90]", value);
+                    }
+                    return;
+                }
+                this.agcCompressionGain = value;
+                if (this.proc != null)
+                {
+                    this.proc.AGCCompressionGain = this.agcCompressionGain;
                 }
             }
         }
@@ -194,12 +243,22 @@ namespace Photon.Voice.Unity
             get { return this.vad; }
             set
             {
-                if (value != this.vad)
+                if (value == this.vad)
                 {
-                    this.vad = value;
-                    this.applyToProc();
+                    return;
+                }
+                this.vad = value;
+                if (this.proc != null)
+                {
+                    this.proc.VAD = this.vad;
                 }
             }
+        }
+
+        public bool ForceNormalAecInMobile
+        {
+            get { return this.forceNormalAecInMobile; }
+            set { this.forceNormalAecInMobile = value; }
         }
 
         #endregion
@@ -209,196 +268,346 @@ namespace Photon.Voice.Unity
         protected override void Awake()
         {
             base.Awake();
-            if (this.IsSupported)
+            if (this.SupportedPlatformCheck())
             {
-                AudioSettings.OnAudioConfigurationChanged += this.OnAudioConfigurationChanged;
-            }
-            else
-            {
-                this.Logger.LogWarning("WebRtcAudioDsp is not supported on this platform {0}. The component will be disabled.", Application.platform);
-            }
-        }
-
-        // required for the MonoBehaviour to have the 'enabled' checkbox
-        private void Start()
-        {
-        }
-
-        public bool IsSupported =>
-#if PLATFORM_IS_SUPPORTED
-        true;
-#else
-        false;
-#endif
-        public void AdjustVoiceInfo(ref VoiceInfo voiceInfo, ref AudioSampleType st)
-        {
-            if (IsSupported && enabled)
-            {
-                st = AudioSampleType.Short;
-                this.Logger.LogInfo("Type Conversion set to Short. Audio samples will be converted if source samples types differ.");
-                // WebRTC DSP supports 8000 16000 [32000] 48000 Hz
-                // TODO: correct, opus-independent parameters matching implementation.
-                // The code below relies on the assumption that voiceInfo.SamplingRate is from POpusCodec.Enums.SamplingRate set.
-                switch (voiceInfo.SamplingRate)
+                this.recorder = this.GetComponent<Recorder>();
+                if (this.recorder == null)
                 {
-                    case 12000:
-                        this.Logger.LogWarning("Sampling rate requested (12kHz) is not supported by WebRtcAudioDsp, switching to the closest supported value: 16kHz.");
-                        voiceInfo.SamplingRate = 16000;
-                        break;
-                    case 24000:
-                        this.Logger.LogWarning("Sampling rate requested (24kHz) is not supported by WebRtcAudioDsp, switching to the closest supported value: 48kHz.");
-                        voiceInfo.SamplingRate = 48000;
-                        break;
+                    if (this.Logger.IsErrorEnabled)
+                    {
+                        this.Logger.LogError("A Recorder component needs to be attached to the same GameObject");
+                    }
+                    this.enabled = false;
+                    return;
                 }
-                if (voiceInfo.FrameDurationUs < 10000)
+                if (!this.IgnoreGlobalLogLevel)
                 {
-                    this.Logger.LogWarning("Frame duration requested ({0}ms) is not supported by WebRtcAudioDsp (it needs to be N x 10ms), switching to the closest supported value: 10ms.", (int)voiceInfo.FrameDurationUs / 1000);
-                    voiceInfo.FrameDurationUs = 10000;
+                    this.LogLevel = this.recorder.LogLevel;
+                }
+                AudioListener[] audioListeners = FindObjectsOfType<AudioListener>();
+                AudioListener audioListener = null;
+                for(int i=0; i < audioListeners.Length; i++)
+                {
+                    if (audioListeners[i].gameObject.activeInHierarchy && audioListeners[i].enabled)
+                    {
+                        audioListener = audioListeners[i];
+                        break;
+                    }
+                }
+                if (!this.SetOrSwitchAudioListener(audioListener, false))
+                {
+                    if (this.Logger.IsErrorEnabled)
+                    {
+                        this.Logger.LogError("AudioListener and AudioOutCapture components are required");
+                    }
+                    this.enabled = false;
                 }
             }
         }
 
-        private void OnAudioConfigurationChanged(bool deviceWasChanged)
+        private void OnEnable()
         {
-            if (this.outputSampleRate != AudioSettings.outputSampleRate)
+            if (this.SupportedPlatformCheck() && this.recorder.IsRecording && this.proc == null)
             {
-                this.Logger.LogInfo("AudioConfigChange: outputSampleRate from {0} to {1}. WebRtcAudioDsp will be restarted.", this.outputSampleRate, AudioSettings.outputSampleRate);
-                this.outputSampleRate = AudioSettings.outputSampleRate;
-                this.Restart();
-            }
-            if (this.reverseChannels != channelsMap[AudioSettings.speakerMode])
-            {
-                this.Logger.LogInfo("AudioConfigChange: speakerMode channels from {0} to {1}. WebRtcAudioDsp will be restarted.", this.reverseChannels, channelsMap[AudioSettings.speakerMode]);
-                this.reverseChannels = channelsMap[AudioSettings.speakerMode];
-                this.Restart();
+                if (this.Logger.IsWarningEnabled)
+                {
+                    this.Logger.LogWarning("WebRtcAudioDsp is added after recording has started, restarting recording to take effect");
+                }
+                this.recorder.RestartRecording(true);
+                this.SetOutputListener();
             }
         }
 
-        // triggered by OnAudioFilterRead which is called on a different thread from the main thread (namely the audio thread)
-        // so calling into many Unity functions from this function is not allowed (if you try, a warning shows up at run time)
+        private void OnDisable()
+        {
+            this.SetOutputListener(false);
+        }
+
+        private bool SupportedPlatformCheck()
+        {
+            #if WEBRTC_AUDIO_DSP_SUPPORTED_PLATFORM
+            return true;
+            #elif WEBRTC_AUDIO_DSP_SUPPORTED_EDITOR
+            if (this.Logger.IsWarningEnabled)
+            {
+                this.Logger.LogWarning("WebRtcAudioDsp is not supported on this target platform {0}. The component will be disabled in build.", CurrentPlatform);
+            }
+            return true;
+            #else
+            if (this.Logger.IsErrorEnabled)
+            {
+                this.Logger.LogError("WebRtcAudioDsp is not supported on this platform {0}. The component will be disabled.", CurrentPlatform);
+            }
+            this.enabled = false;
+            return false;
+            #endif
+        }
+
+        private void SetOutputListener()
+        {
+            this.SetOutputListener(this.AEC);
+        }
+
+        private void SetOutputListener(bool on)
+        {
+            if (this.ac != null && this.started != on && this.proc != null)
+            {
+                if (on)
+                {
+                    this.started = true;
+                    this.ac.OnAudioFrame += this.OnAudioOutFrameFloat;
+                }
+                else
+                {
+                    this.started = false;
+                    this.ac.OnAudioFrame -= this.OnAudioOutFrameFloat;
+                }
+            }
+        }
+
         private void OnAudioOutFrameFloat(float[] data, int outChannels)
         {
             if (outChannels != this.reverseChannels)
             {
-                this.Logger.LogWarning("OnAudioOutFrame channel count {0} != initialized {1}.", outChannels, this.reverseChannels);
+                if (this.Logger.IsErrorEnabled)
+                {
+                    this.Logger.LogError("OnAudioOutFrame channel count {0} != initialized {1}.  Switching channels and restarting.", outChannels, this.reverseChannels);
+                }
+                this.reverseChannels = outChannels;
+                this.Restart();
             }
-            else
-            {
-                this.proc.OnAudioOutFrameFloat(data);
-            }
+            this.proc.OnAudioOutFrameFloat(data);
         }
 
-        // Unity message sent by Recorder
+        // Message sent by Recorder
         private void PhotonVoiceCreated(PhotonVoiceCreatedParams p)
         {
-            if (this.IsSupported && this.enabled)
+            if (!this.enabled)
             {
-                if (p.Voice.Info.Channels != 1)
+                return;
+            }
+            if (this.recorder != null && this.recorder.SourceType != Recorder.InputSourceType.Microphone)
+            {
+                if (this.Logger.IsWarningEnabled)
                 {
-                    this.Logger.LogError("Only mono audio signals supported. WebRtcAudioDsp component will be disabled.");
-                    return;
+                    this.Logger.LogWarning("WebRtcAudioDsp is better suited to be used with Microphone as Recorder Input Source Type.");
                 }
-                if (p.Voice is LocalVoiceAudioShort voice)
+            }
+            this.localVoice = p.Voice;
+            if (this.localVoice.Info.Channels != 1)
+            {
+                if (this.Logger.IsErrorEnabled)
                 {
-                    this.StartProc(voice);
-                    this.localVoice = voice;
+                    this.Logger.LogError("Only mono audio signals supported.");
                 }
-                else
+                this.enabled = false;
+                return;
+            }
+            if (!(this.localVoice is LocalVoiceAudioShort))
+            {
+                if (this.Logger.IsErrorEnabled)
                 {
-                    this.Logger.LogError("Only short audio voice supported. WebRtcAudioDsp component will be disabled.");
+                    this.Logger.LogError("Only short audio voice supported.");
                 }
+                this.enabled = false;
+                return;
+            }
+
+            // can't access the AudioSettings properties in InitAEC if it's called from not main thread
+            this.reverseChannels = channelsMap[AudioSettings.speakerMode];
+            this.outputSampleRate = AudioSettings.outputSampleRate;
+            this.Init();
+            LocalVoiceAudioShort v = this.localVoice as LocalVoiceAudioShort;
+            v.AddPostProcessor(this.proc);
+            this.SetOutputListener();
+            if (this.Logger.IsInfoEnabled)
+            {
+                this.Logger.LogInfo("Initialized");
             }
         }
 
-        // Unity message sent by Recorder
         private void PhotonVoiceRemoved()
         {
-            this.StopProc(this.localVoice);
-            this.localVoice = null;
+            this.Reset();
         }
 
         private void OnDestroy()
         {
-            this.StopProc(this.localVoice);
-            AudioSettings.OnAudioConfigurationChanged -= this.OnAudioConfigurationChanged;
+            this.Reset();
         }
 
-        private void StartProc(LocalVoiceAudioShort v)
+        private void Reset()
         {
-            this.Logger.LogInfo("Start");
-            this.reverseChannels = channelsMap[AudioSettings.speakerMode];
-            this.outputSampleRate = AudioSettings.outputSampleRate;
-            this.proc = new WebRTCAudioProcessor(this.Logger, v.Info.FrameSize, v.Info.SamplingRate, v.Info.Channels, this.outputSampleRate, this.reverseChannels);
-            this.applyToProc();
-            v.AddPostProcessor(this.proc);
-        }
-
-        private void StopProc(LocalVoiceAudioShort v)
-        {
-            this.Logger.LogInfo("Stop");
-            this.setOutputListener(false);
-            if (proc != null)
+            this.SetOutputListener(false);
+            if (this.proc != null)
             {
                 this.proc.Dispose();
+                this.proc = null;
             }
-            if (v != null)
-            {
-                v.RemoveProcessor(this.proc);
-            }
-            // TODO: remove processor from local voice
         }
 
         private void Restart()
         {
-            this.Logger.LogInfo("Restart");
-            this.StopProc(this.localVoice);
-            if (this.localVoice != null)
-            {
-                this.StartProc(this.localVoice);
-            }
+            this.Reset();
+            this.Init();
+            this.SetOutputListener();
         }
 
-        private void setOutputListener(bool set)
+        private void Init()
         {
-            var audioListener = FindObjectOfType<AudioListener>();
-            if (audioListener != null)
+            this.proc = new WebRTCAudioProcessor(this.Logger, this.localVoice.Info.FrameSize, this.localVoice.Info.SamplingRate,
+                this.localVoice.Info.Channels, this.outputSampleRate, this.reverseChannels);
+            #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
+            this.proc.AEC = this.AEC && this.ForceNormalAecInMobile;
+            this.proc.AECMobile = this.AEC && !this.ForceNormalAecInMobile;
+            #else
+            this.proc.AEC = this.AEC;
+            this.proc.AECMobile = false;
+            #endif
+            this.proc.AECStreamDelayMs = this.ReverseStreamDelayMs;
+            this.proc.AECHighPass = this.AecHighPass;
+            this.proc.HighPass = this.HighPass;
+            this.proc.NoiseSuppression = this.NoiseSuppression;
+            this.proc.AGC = this.AGC;
+            this.proc.AGCCompressionGain = this.AgcCompressionGain;
+            this.proc.VAD = this.VAD;
+            this.proc.Bypass = this.Bypass;
+        }
+
+        private bool SetOrSwitchAudioListener(AudioListener audioListener, bool extraChecks)
+        {
+            if (audioListener == null)
             {
-                var ac = audioListener.gameObject.GetComponent<AudioOutCapture>();
-                if (ac != null)
+                if (this.Logger.IsErrorEnabled)
                 {
-                    ac.OnAudioFrame -= OnAudioOutFrameFloat;
+                    this.Logger.LogError("audioListener passed is null or is being destroyed");
                 }
-                if (set)
+                return false;
+            }
+            if (extraChecks)
+            {
+                if (!audioListener.gameObject.activeInHierarchy)
                 {
-                    if (ac == null)
+                    if (this.Logger.IsErrorEnabled)
                     {
-                        ac = audioListener.gameObject.AddComponent<AudioOutCapture>();
+                        this.Logger.LogError("The GameObject to which the audioListener is attached is not active in hierarchy");
                     }
-
-                    ac.OnAudioFrame += OnAudioOutFrameFloat;
+                    return false;
+                }
+                if (!audioListener.enabled)
+                {
+                    if (this.Logger.IsErrorEnabled)
+                    {
+                        this.Logger.LogError("audioListener passed is disabled");
+                    }
+                    return false;
                 }
             }
+            AudioOutCapture audioOutCapture = audioListener.GetComponent<AudioOutCapture>();
+            if (audioOutCapture == null)
+            {
+                audioOutCapture = audioListener.gameObject.AddComponent<AudioOutCapture>();
+            }
+            return this.SetOrSwitchAudioOutCapture(audioOutCapture, false);
         }
 
-        private void applyToProc()
+
+        private bool SetOrSwitchAudioOutCapture(AudioOutCapture audioOutCapture, bool extraChecks)
         {
-            if (proc != null)
+            if (audioOutCapture == null)
             {
-                proc.AEC = this.aec;
-                proc.AECMobile = this.aec && Application.isMobilePlatform;
-                setOutputListener(this.aec);
-                proc.AECStreamDelayMs = this.reverseStreamDelayMs;
-                proc.AECHighPass = this.aecHighPass;
-                proc.HighPass = this.highPass;
-                proc.NoiseSuppression = this.noiseSuppression;
-                proc.AGC = this.agc;
-                proc.AGCCompressionGain = this.agcCompressionGain;
-                proc.AGCTargetLevel = this.agcTargetLevel;
-                //proc.AGC2 = AGC2;
-                proc.VAD = VAD;
-                proc.Bypass = Bypass;
+                if (this.Logger.IsErrorEnabled)
+                {
+                    this.Logger.LogError("audioOutCapture passed is null or is being destroyed");
+                }
+                return false;
             }
+            if (!audioOutCapture.enabled)
+            {
+                if (this.Logger.IsErrorEnabled)
+                {
+                    this.Logger.LogError("audioOutCapture passed is disabled");
+                }
+                return false;
+            }
+            if (extraChecks)
+            {
+                if (!audioOutCapture.gameObject.activeInHierarchy)
+                {
+                    if (this.Logger.IsErrorEnabled)
+                    {
+                        this.Logger.LogError("The GameObject to which the audioOutCapture is attached is not active in hierarchy");
+                    }
+                    return false;
+                }
+                AudioListener audioListener = audioOutCapture.GetComponent<AudioListener>();
+                if (audioListener == null)
+                {
+                    if (this.Logger.IsErrorEnabled)
+                    {
+                        this.Logger.LogError("The AudioListener attached to the same GameObject as the audioOutCapture is null or being destroyed");
+                    }
+                    return false;
+                }
+                if (!audioListener.enabled)
+                {
+                    if (this.Logger.IsErrorEnabled)
+                    {
+                        this.Logger.LogError("The AudioListener attached to the same GameObject as the audioOutCapture is disabled");
+                    }
+                    return false;
+                }
+            }
+            if (this.ac != null)
+            {
+                if (this.ac != audioOutCapture)
+                {
+                    if (this.started)
+                    {
+                        this.ac.OnAudioFrame -= this.OnAudioOutFrameFloat;
+                    }
+                }
+                else
+                {
+                    if (this.Logger.IsErrorEnabled)
+                    {
+                        this.Logger.LogError("The same audioOutCapture is being used already");
+                    }
+                    return false;
+                }
+            }
+            this.ac = audioOutCapture;
+            if (this.started)
+            {
+                this.ac.OnAudioFrame += this.OnAudioOutFrameFloat;
+            }
+            return true;
         }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Set the AudioListener to be used with this WebRtcAudioDsp
+        /// </summary>
+        /// <param name="audioListener">The audioListener to be used</param>
+        /// <returns>Success or failure</returns>
+        public bool SetOrSwitchAudioListener(AudioListener audioListener)
+        {
+            return this.SetOrSwitchAudioListener(audioListener, true);
+        }
+
+        /// <summary>
+        /// Set the AudioOutCapture to be used with this WebRtcAudioDsp
+        /// </summary>
+        /// <param name="audioOutCapture">The audioOutCapture to be used</param>
+        /// <returns>Success or failure</returns>
+        public bool SetOrSwitchAudioOutCapture(AudioOutCapture audioOutCapture)
+        {
+            return this.SetOrSwitchAudioOutCapture(audioOutCapture, true);
+        }
+
         #endregion
     }
 }
