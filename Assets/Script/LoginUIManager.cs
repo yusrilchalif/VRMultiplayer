@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class LoginUIManager : MonoBehaviour
 {
-    [SerializeField] GameObject connectOptionsPanelGameObject;
-    [SerializeField] GameObject connectingWithNamePanelGameObject;
+    public GameObject ConnectOptionsPanelGameobject;
+    public GameObject ConnectWithNamePanelGameobject;
 
+    #region Unity Methods
     // Start is called before the first frame update
     void Start()
     {
-        connectOptionsPanelGameObject.SetActive(true);
-        connectingWithNamePanelGameObject.SetActive(false);
+        ConnectOptionsPanelGameobject.SetActive(true);
+        ConnectWithNamePanelGameobject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
+    #endregion
 }

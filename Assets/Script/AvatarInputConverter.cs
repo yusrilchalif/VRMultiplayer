@@ -1,9 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AvatarInputConverter : MonoBehaviour
 {
+
     //Avatar Transform
     [SerializeField] Transform mainAvatarTransform;
     [SerializeField] Transform avatarHead;
@@ -19,14 +20,6 @@ public class AvatarInputConverter : MonoBehaviour
     public Vector3 headPositionOffest;
     public Vector3 handRotationOffset;
 
-    //Prefab emulator
-    //public GameObject emulator;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //ChangeEmulatorCondition();
-    }
 
     // Update is called once per frame
     void Update()
@@ -45,16 +38,4 @@ public class AvatarInputConverter : MonoBehaviour
         avatarHandLeft.position = xrHandLeft.position;
         avatarHandLeft.rotation = xrHandLeft.rotation * Quaternion.Euler(handRotationOffset);
     }
-
-    //void ChangeEmulatorCondition()
-    //{
-    //    if (Application.isEditor)
-    //    {
-    //        emulator.SetActive(true);
-    //    }
-    //    else if (!Application.isEditor)
-    //    {
-    //        emulator.SetActive(false);
-    //    }
-    //}
 }

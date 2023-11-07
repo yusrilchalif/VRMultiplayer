@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(LoginManagers))]
+[CustomEditor(typeof(LoginManager))]
 public class LoginManagerEditorScript : Editor
 {
+
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        EditorGUILayout.HelpBox("This script is responsbile for connecting to Photon Server.", MessageType.Info);
+        EditorGUILayout.HelpBox("This script is responsbile for connecting to Photon Servers.",MessageType.Info);
 
-        LoginManagers login = (LoginManagers)target;
-        if(GUILayout.Button("Connect Anonymously"))
+        LoginManager loginManager = (LoginManager)target;
+
+        if (GUILayout.Button("Connect Anonymously"))
         {
-            login.ConnectAnonymously();
+            loginManager.ConnectAnonymously();
         }
     }
 }

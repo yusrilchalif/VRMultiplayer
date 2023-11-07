@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d172fe14dae544d589e3ece43fc37f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupancyRateTextVRLab: {fileID: 1840530903031106632}
+  OccupancyRateText_VRLAB: {fileID: 1840530903031106632}
 --- !u!4 &378145119
 Transform:
   m_ObjectHideFlags: 0
@@ -1242,7 +1242,6 @@ MonoBehaviour:
   xrHandRight: {fileID: 537440029}
   headPositionOffest: {x: 0, y: -0.9, z: 0}
   handRotationOffset: {x: 0, y: 0, z: 0}
-  emulator: {fileID: 0}
 --- !u!1 &1890222576
 GameObject:
   m_ObjectHideFlags: 0
