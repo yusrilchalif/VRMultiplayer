@@ -4,45 +4,38 @@ using UnityEngine;
 
 public class AvatarInputConverter : MonoBehaviour
 {
-    //Avatar Transform
-    public Transform mainAvatarTransform;
-    public Transform avatarHead;
-    public Transform avatarBody;
-    public Transform avatarHandLeft;
-    public Transform avatarHandRight;
+    //Avatar Transforms
+    public Transform MainAvatarTransform;
+    public Transform AvatarHead;
+    public Transform AvatarBody;
 
-    //XRRig Transform
+    public Transform AvatarHand_Left;
+    public Transform AvatarHand_Right;
+
+    //XRRig Transforms
     public Transform XRHead;
-    public Transform xrHandLeft;
-    public Transform xrHandRight;
 
-    public Vector3 headPositionOffest;
+    public Transform XRHand_Left;
+    public Transform XRHand_Right;
+
+    public Vector3 headPositionOffset;
     public Vector3 handRotationOffset;
 
-    //Prefab emulator
-    //public GameObject emulator;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //ChangeEmulatorCondition();
-    }
 
     // Update is called once per frame
     void Update()
     {
-        // Head and body sync
-        mainAvatarTransform.position = Vector3.Lerp(mainAvatarTransform.position, XRHead.position + headPositionOffest, 0.5f);
-        avatarHead.rotation = Quaternion.Lerp(avatarHead.rotation, XRHead.rotation, 0.5f);
-        avatarBody.rotation = Quaternion.Lerp(avatarBody.rotation, Quaternion.Euler(new Vector3(0, avatarHead.rotation.eulerAngles.y, 0)), 0.05f);
+        //Head and Body synch
+        MainAvatarTransform.position = Vector3.Lerp(MainAvatarTransform.position, XRHead.position + headPositionOffset, 0.5f);
+        AvatarHead.rotation = Quaternion.Lerp(AvatarHead.rotation, XRHead.rotation, 0.5f);
+        AvatarBody.rotation = Quaternion.Lerp(AvatarBody.rotation, Quaternion.Euler(new Vector3(0, AvatarHead.rotation.eulerAngles.y, 0)), 0.05f);
 
-        // Right hand sync
-        avatarHandRight.position = Vector3.Lerp(avatarHandRight.position, xrHandRight.position, 0.5f);
-        avatarHandRight.rotation = Quaternion.Lerp(avatarHandRight.rotation, xrHandRight.rotation, 0.5f) * Quaternion.Euler(handRotationOffset);
+        //Hands synch
+        AvatarHand_Right.position = Vector3.Lerp(AvatarHand_Right.position, XRHand_Right.position, 0.5f);
+        AvatarHand_Right.rotation = Quaternion.Lerp(AvatarHand_Right.rotation, XRHand_Right.rotation, 0.5f) * Quaternion.Euler(handRotationOffset);
 
-        // Left hand does not follow the right hand
-        // Remove the interpolation for the left hand
-        avatarHandLeft.position = xrHandLeft.position;
-        avatarHandLeft.rotation = xrHandLeft.rotation * Quaternion.Euler(handRotationOffset);
+        AvatarHand_Left.position = Vector3.Lerp(AvatarHand_Left.position, XRHand_Left.position, 0.5f);
+        AvatarHand_Left.rotation = Quaternion.Lerp(AvatarHand_Left.rotation, XRHand_Left.rotation, 0.5f) * Quaternion.Euler(handRotationOffset);
     }
 }

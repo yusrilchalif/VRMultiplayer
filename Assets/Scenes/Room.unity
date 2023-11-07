@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6373d7517f8d53f46aea0fa2ecb862aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  occupancyRateTextVRLab: {fileID: 1840530903031106632}
+  OccupancyRateTextVRLab: {fileID: 1840530903031106632}
 --- !u!4 &378145119
 Transform:
   m_ObjectHideFlags: 0
