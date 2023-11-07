@@ -1308,14 +1308,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1514258151789922152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb513cd2b326a453e9bf3338b62b4bcd, type: 3}
+  m_Script: {fileID: 11500000, guid: 3acc02cf468fefa458df9a72d35d32ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UIController: {fileID: 664215872766999371}
   BaseController: {fileID: 3838599112708790351}
   inputActionReference_UISwitcher: {fileID: 6254985434281782296, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  UICanvasGameobject: {fileID: 429637530640018347}
+  UIGameobjects: {fileID: 429637530640018347}
 --- !u!1 &1519361818253004197
 GameObject:
   m_ObjectHideFlags: 0
@@ -2085,7 +2085,6 @@ GameObject:
   - component: {fileID: 5309305352464797455}
   - component: {fileID: 199841156054599878}
   - component: {fileID: 430345817978188536}
-  - component: {fileID: 2339911655058509809}
   m_Layer: 0
   m_Name: Generic VR Player 1
   m_TagString: Untagged
@@ -2129,7 +2128,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 0
   ObservedComponents:
-  - {fileID: 2339911655058509809}
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -2142,7 +2141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2682015117141561006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 589fd326796ae449aa48f67d460d7a5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a974fdf9c4b5ab4a81a2eeca2ff6487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   LocalXRRigGameobject: {fileID: 8616775373487327726}
@@ -2151,24 +2150,6 @@ MonoBehaviour:
   AvatarBodyGameobject: {fileID: 7868397104078011949}
   AvatarModelPrefabs: []
   PlayerName_Text: {fileID: 7142728110850302039}
---- !u!114 &2339911655058509809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2682015117141561006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aee50fb2f16742ec89438eb0000e011, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generalVRPlayerTransform: {fileID: 5309305352464797455}
-  mainAvatarTransform: {fileID: 6357888222909969387}
-  headTransform: {fileID: 6667846040195762911}
-  bodyTransform: {fileID: 5979248540104111291}
-  leftHandTransform: {fileID: 8743816246935987431}
-  rightHandTransform: {fileID: 5378767101123511228}
 --- !u!1 &2949001041072863911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2807,10 +2788,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4834261642822126449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05c81614602d44e929a645f473f7986a, type: 3}
+  m_Script: {fileID: 11500000, guid: a25cf1ad53c48ec4a9c96a500d7f0398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goHomeBtn: {fileID: 6079538555198695691}
+  GoHome_Button: {fileID: 6079538555198695691}
 --- !u!1 &7868397104078011949
 GameObject:
   m_ObjectHideFlags: 0
@@ -3108,7 +3089,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8037219583754639283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ef33ca9eb0f34b0caaf09b3353706af, type: 3}
+  m_Script: {fileID: 11500000, guid: 01197ffe343b5d74081bff3e063d0d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_BaseControllerGameObject: {fileID: 1281960269933082516}
@@ -3117,8 +3098,8 @@ MonoBehaviour:
     type: 3}
   m_TeleportModeCancel: {fileID: 2307464322626738743, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  m_Turn: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  m_Move: {fileID: -8198699208435500284, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  m_Turn: {fileID: -8525429354371678379, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  m_Move: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_TranslateAnchor: {fileID: 875253871413052681, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   m_RotateAnchor: {fileID: -5913262927076077117, guid: c348712bda248c246b8c49b3db54643f,
@@ -3251,13 +3232,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6095380171701094546}
-  - component: {fileID: 7029126948827207889}
+  - component: {fileID: 1217482154003259598}
   - component: {fileID: 4331875657987135100}
   - component: {fileID: 3440613386010011795}
   - component: {fileID: 7608194356815038669}
   - component: {fileID: 7152452511414694652}
   - component: {fileID: 3214185205435904212}
   - component: {fileID: 8637191132873200492}
+  - component: {fileID: 4312480483186111046}
   m_Layer: 10
   m_Name: XR Rig
   m_TagString: Untagged
@@ -3283,7 +3265,7 @@ Transform:
   m_Father: {fileID: 5309305352464797455}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7029126948827207889
+--- !u!114 &1217482154003259598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3292,15 +3274,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8616775373487327726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7448815bd5148434682b3d931066cd10, type: 3}
+  m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 6148371493272230505}
   m_OriginBaseGameObject: {fileID: 8616775373487327726}
   m_CameraFloorOffsetObject: {fileID: 2324972050541061391}
   m_RequestedTrackingOriginMode: 2
-  m_CameraYOffset: 1.36144
-  m_CameraGameObject: {fileID: 731221320599835644}
+  m_CameraYOffset: 1.1176
 --- !u!114 &4331875657987135100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3310,7 +3291,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8616775373487327726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51fc630f1016e4a5595ea0b8f78e67d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a00784c45dc44745bf81d5698ff1b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainAvatarTransform: {fileID: 6357888222909969387}
@@ -3320,7 +3301,7 @@ MonoBehaviour:
   avatarHandRight: {fileID: 5378767101123511228}
   XRHead: {fileID: 8834539314346807836}
   xrHandLeft: {fileID: 1708547729746032954}
-  xrHandRight: {fileID: 7230884108940332963}
+  xrHandRight: {fileID: 2883286318067636116}
   headPositionOffest: {x: 0, y: -0.9, z: 0}
   handRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &3440613386010011795
@@ -3336,7 +3317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Timeout: 10
-  m_XROrigin: {fileID: 7029126948827207889}
+  m_XROrigin: {fileID: 1217482154003259598}
 --- !u!114 &7608194356815038669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3457,6 +3438,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_System: {fileID: 3440613386010011795}
   m_DelayTime: 0
+--- !u!114 &4312480483186111046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616775373487327726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 496880615cd240be960d436c1c8ae570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 3440613386010011795}
+  m_ClimbSettings:
+    m_UseConstant: 1
+    m_ConstantValue:
+      m_AllowFreeXMovement: 1
+      m_AllowFreeYMovement: 1
+      m_AllowFreeZMovement: 1
+    m_Variable: {fileID: 0}
 --- !u!1001 &657508138870959334
 PrefabInstance:
   m_ObjectHideFlags: 0

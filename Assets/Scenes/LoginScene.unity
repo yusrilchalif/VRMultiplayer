@@ -805,11 +805,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 710813491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39a5e5de84c7c45c89a8c3c1b5687759, type: 3}
+  m_Script: {fileID: 11500000, guid: 04dd4cde8c0eb0440b04c1c979bc4875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectOptionsPanelGameObject: {fileID: 733559949}
-  connectingWithNamePanelGameObject: {fileID: 804690260}
+  ConnectOptionsPanelGameobject: {fileID: 733559949}
+  ConnectWithNamePanelGameobject: {fileID: 804690260}
 --- !u!1 &733559949 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4259889453178614642, guid: d9fc25a28cdea4997a273777cdf440dc,
@@ -872,6 +872,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259889452471046910, guid: d9fc25a28cdea4997a273777cdf440dc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4259889452726300413, guid: d9fc25a28cdea4997a273777cdf440dc,
         type: 3}
@@ -1567,11 +1572,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1748923849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10bfb5b7b230e43a4b0f7208bab5b0f7, type: 3}
+  m_Script: {fileID: 11500000, guid: d4cd50bc2244c4a4ba51bdab5ec84465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pvCache: {fileID: 0}
-  usernameInput: {fileID: 1204873460}
+  PlayerName_InputName: {fileID: 1204873460}
 --- !u!1 &1890222576
 GameObject:
   m_ObjectHideFlags: 0

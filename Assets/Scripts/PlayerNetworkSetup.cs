@@ -87,10 +87,10 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
 
         AvatarInputConverter avatarInputConverter = LocalXRRigGameobject.GetComponent<AvatarInputConverter>();
         AvatarHolder avatarHolder = selectedAvatarGameobject.GetComponent<AvatarHolder>();
-        SetUpAvatarGameobject(avatarHolder.HeadTransform, avatarInputConverter.AvatarHead);
-        SetUpAvatarGameobject(avatarHolder.BodyTransform, avatarInputConverter.AvatarBody);
-        SetUpAvatarGameobject(avatarHolder.HandLeftTransform, avatarInputConverter.AvatarHand_Left);
-        SetUpAvatarGameobject(avatarHolder.HandRightTransform, avatarInputConverter.AvatarHand_Right);
+        SetUpAvatarGameobject(avatarHolder.HeadTransform, avatarInputConverter.avatarHead);
+        SetUpAvatarGameobject(avatarHolder.BodyTransform, avatarInputConverter.avatarBody);
+        SetUpAvatarGameobject(avatarHolder.HandLeftTransform, avatarInputConverter.avatarHandLeft);
+        SetUpAvatarGameobject(avatarHolder.HandRightTransform, avatarInputConverter.avatarHandRight);
     }
 
     void SetUpAvatarGameobject(Transform avatarModelTransform, Transform mainAvatarTransform)

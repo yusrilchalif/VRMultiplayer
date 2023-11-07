@@ -4,20 +4,20 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.UI;
+
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     private string mapType;
 
-    public TextMeshProUGUI OccupancyRateText_ForSchool;
-    public TextMeshProUGUI OccupancyRateText_ForOutdoor;
-
+    [SerializeField] TextMeshProUGUI occupancyRateTextVRLab;
 
     // Start is called before the first frame update
     void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
 
-        if (!PhotonNetwork.IsConnectedAndReady)
+        if (PhotonNetwork.IsConnectedAndReady)
         {
             PhotonNetwork.ConnectUsingSettings();
         }
@@ -33,137 +33,100 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     }
 
-    #region UI Callback Methods
     public void JoinRandomRoom()
     {
         PhotonNetwork.JoinRandomRoom();
     }
 
-    public void OnEnterButtonClicked_Outdoor()
-    {
-        mapType = MultiplayerVRConstants.MAP_TYPE_VALUE_OUTDOOR;
-        ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { MultiplayerVRConstants.MAP_TYPE_KEY, mapType } };
-        PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
-    }
 
-    public void OnEnterButtonClicked_School()
-    {
-        mapType = MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL;
-        ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { {MultiplayerVRConstants.MAP_TYPE_KEY, mapType } };
-        PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties,0);
-    }
-    #endregion
 
-    #region Photon Callback Methods
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log(message);
+        print("The message: " + message);
         CreateAndJoinRoom();
+    }
+
+    public void OnEnterButtonClicked_VRLAB()
+    {
+        mapType = MultiplayerVRConstants.MAP_TYPE_VALUE_VRLAB;
+
+        ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties = new ExitGames.Client.Photon.Hashtable { { MultiplayerVRConstants.MAP_TYPE_KEY, mapType } };
+        PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
     }
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("Connected to servers again.");
+        print("Connected to server again.");
         PhotonNetwork.JoinLobby();
     }
 
     public override void OnCreatedRoom()
     {
-        Debug.Log("A room is created with the name: " + PhotonNetwork.CurrentRoom.Name);
+        print("A room is created by name: " + PhotonNetwork.CurrentRoom.Name);
     }
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("The Local player: " + PhotonNetwork.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name + " Player count " + PhotonNetwork.CurrentRoom.PlayerCount);
+        print("The local player: " + PhotonNetwork.NickName + " Join the room" + PhotonNetwork.CurrentRoom.Name + "Player count " + PhotonNetwork.CurrentRoom.PlayerCount);
 
         if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey(MultiplayerVRConstants.MAP_TYPE_KEY))
         {
             object mapType;
-            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(MultiplayerVRConstants.MAP_TYPE_KEY,out mapType))
+            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(MultiplayerVRConstants.MAP_TYPE_KEY, out mapType))
             {
-                Debug.Log("Joined room with the map: " + (string)mapType);
-                if ((string)mapType == MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL)
+                print("Joines room with the map: " + (string)mapType);
+                if ((string)mapType == MultiplayerVRConstants.MAP_TYPE_VALUE_VRLAB)
                 {
-                    //Load the school scene
-                    PhotonNetwork.LoadLevel("World_School");
-
-                }else if ((string)mapType == MultiplayerVRConstants.MAP_TYPE_VALUE_OUTDOOR)
-                {
-                    //Load the outdoor scene
-                    PhotonNetwork.LoadLevel("World_Outdoor");
-
+                    //Load VRLab scene
+                    PhotonNetwork.LoadLevel(2);
                 }
+                //Create else for add a room
             }
         }
-
-
     }
-
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log(newPlayer.NickName + " joined to: " + "Player count: " + PhotonNetwork.CurrentRoom.PlayerCount);
+        print(newPlayer.NickName + " joined to " + "Player count: " + PhotonNetwork.CurrentRoom.PlayerCount);
     }
-
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         if (roomList.Count == 0)
         {
-            //There is no room at all
-            OccupancyRateText_ForSchool.text = 0 + " / " + 20;
-            OccupancyRateText_ForOutdoor.text = 0 + " / " + 20;
-
+            occupancyRateTextVRLab.text = 0 + " / " + 15;
         }
 
         foreach (RoomInfo room in roomList)
         {
-            Debug.Log(room.Name);
-            if (room.Name.Contains(MultiplayerVRConstants.MAP_TYPE_VALUE_OUTDOOR))
+            print(room.Name);
+            if (room.Name.Contains(MultiplayerVRConstants.MAP_TYPE_VALUE_VRLAB))
             {
-                //Update the Outdoor room occupancy field
-                Debug.Log("Room is a Outdoor map. Player count is: " + room.PlayerCount);
-
-                OccupancyRateText_ForOutdoor.text = room.PlayerCount + " / " + 20;
-
-            }else if (room.Name.Contains(MultiplayerVRConstants.MAP_TYPE_VALUE_SCHOOL))
-            {
-                Debug.Log("Room is a School map. Player count is: " +room.PlayerCount);
-                OccupancyRateText_ForSchool.text = room.PlayerCount + " / " + 20;
+                //Update the occupancy text
+                print("Room is a vrlab. player count is: " + room.PlayerCount);
+                occupancyRateTextVRLab.text = room.PlayerCount + " / " + 15;
             }
+            //Create else for add a room
         }
-
-
     }
 
     public override void OnJoinedLobby()
     {
-        Debug.Log("Joined the Lobby.");
+        print("Joined the lobby");
     }
-    #endregion
 
-    #region Private Methods
-    private void CreateAndJoinRoom()
+    void CreateAndJoinRoom()
     {
-        string randomRoomName = "Room_" +mapType + Random.Range(0, 10000);
+        string randomName = "Room_" + mapType + Random.Range(0, 10000);
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 20;
-
+        roomOptions.MaxPlayers = 15;
 
         string[] roomPropsInLobby = { MultiplayerVRConstants.MAP_TYPE_KEY };
-        //We have 2 different maps
-        //1. Outdoor = "outdoor"
-        //2. School = "school"
-
-        ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { {MultiplayerVRConstants.MAP_TYPE_KEY, mapType } };
+        ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { { MultiplayerVRConstants.MAP_TYPE_KEY, mapType } };
 
         roomOptions.CustomRoomPropertiesForLobby = roomPropsInLobby;
         roomOptions.CustomRoomProperties = customRoomProperties;
 
-        PhotonNetwork.CreateRoom(randomRoomName, roomOptions);
-
+        PhotonNetwork.CreateRoom(randomName, roomOptions);
     }
-
-
-    #endregion
 }

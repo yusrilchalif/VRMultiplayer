@@ -14,14 +14,9 @@ public class RoomManagerEditorScript : Editor
         RoomManager roomManager = (RoomManager)target;
 
        
-        if (GUILayout.Button("Join School Room"))
+        if (GUILayout.Button("Join VR Lab"))
         {
-            roomManager.OnEnterButtonClicked_School();
-        }
-
-        if (GUILayout.Button("Join Outdoor Room"))
-        {
-            roomManager.OnEnterButtonClicked_Outdoor();
+            roomManager.OnEnterButtonClicked_VRLAB();
         }
 
     }

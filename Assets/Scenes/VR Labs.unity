@@ -246,7 +246,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 243286536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.230679, y: 3.2876546, z: 19.027945}
+  m_LocalPosition: {x: 13.673, y: 3.2876546, z: 19.027945}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 659123940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 325273aa0a3e747e4988baf126d0173a, type: 3}
+  m_Script: {fileID: 11500000, guid: a4cec741d01d232488b2707b4c7c0ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &726272887
@@ -1767,12 +1767,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1817150161}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0426fa90488ec45a4875d5e0200c8f85, type: 3}
+  m_Script: {fileID: 11500000, guid: 43722cd748c289843a8001caf498bb51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  genericAvatar: {fileID: 7610300509967925869, guid: d1eccc6afaab64a288c955224493f247,
+  GenericVRPlayerPrefab: {fileID: 2682015117141561006, guid: c0e2e2898b5a94d73983847f880f49a2,
     type: 3}
-  spawnPos: {x: 12.09, y: 3, z: 13.19}
+  spawnPosition: {x: 13.673, y: 3.287655, z: 19.02794}
 --- !u!1 &1917339457
 GameObject:
   m_ObjectHideFlags: 0
