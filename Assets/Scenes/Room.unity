@@ -1229,18 +1229,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1743253702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51fc630f1016e4a5595ea0b8f78e67d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a00784c45dc44745bf81d5698ff1b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainAvatarTransform: {fileID: 1375540133}
-  avatarHead: {fileID: 1375540134}
-  avatarBody: {fileID: 1375540137}
-  avatarHandLeft: {fileID: 1375540136}
-  avatarHandRight: {fileID: 1375540135}
+  MainAvatarTransform: {fileID: 1375540133}
+  AvatarHead: {fileID: 1375540134}
+  AvatarBody: {fileID: 1375540137}
+  AvatarHand_Left: {fileID: 1375540136}
+  AvatarHand_Right: {fileID: 1375540135}
   XRHead: {fileID: 2129091697}
-  xrHandLeft: {fileID: 1890222577}
-  xrHandRight: {fileID: 537440029}
-  headPositionOffest: {x: 0, y: -0.9, z: 0}
+  XRHand_Left: {fileID: 1890222577}
+  XRHand_Right: {fileID: 537440029}
+  headPositionOffset: {x: 0, y: -0.9, z: 0}
   handRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1890222576
 GameObject:
