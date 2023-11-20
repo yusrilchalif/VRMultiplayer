@@ -13,7 +13,7 @@ using UnityEngine.Android;
 public class MicPermissionHelper : MonoBehaviour
 {
 
-    //GameObject dialog = null;
+    GameObject dialog = null;
 
     // Start is called before the first frame update
     void Start()
