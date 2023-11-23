@@ -6,67 +6,70 @@ using Photon.Pun;
 
 public class ToggleSyncController : MonoBehaviourPun, IPunObservable
 {
-    public GameObject objectToHide;
+    public GameObject objectToControl;
     public Toggle toggle;
-    public Image activeSprite;
-    public Image inactiveSprite;
+    public Image activeImage; // Image untuk status aktif
+    public Image inactiveImage; // Image untuk status tidak aktif
+    private bool isObjectActive = true; // Simpan status objek lokal
 
-    private bool isObjectActive = true;
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if(stream.IsWriting)
+        if (stream.IsWriting)
         {
             stream.SendNext(isObjectActive);
         }
         else
         {
             isObjectActive = (bool)stream.ReceiveNext();
-            if(objectToHide != null)
+            if (objectToControl != null)
             {
-                objectToHide.SetActive(isObjectActive);
-                UpdateImageToggle();
+                objectToControl.SetActive(isObjectActive);
+                UpdateToggleImage();
             }
         }
     }
 
-    [PunRPC]
     public void OnToggleValueChanged()
     {
-        if(photonView.IsMine)
+        Debug.Log("Toggle Value Changed!");
+        if (photonView.IsMine)
         {
             isObjectActive = toggle.isOn;
             photonView.RPC("ToggleObjectActiveState", RpcTarget.All, isObjectActive);
-            UpdateImageToggle();
+            UpdateToggleImage();
         }
     }
 
     [PunRPC]
-    private void ToggleObjectActiveState(bool state)
+    void ToggleObjectActiveState(bool state)
     {
+        Debug.Log("Toggle Object Active State RPC received!");
         isObjectActive = state;
-        if(objectToHide != null)
+        if (objectToControl != null)
         {
-            objectToHide.SetActive(isObjectActive);
-            UpdateImageToggle();
+            objectToControl.SetActive(isObjectActive);
+            UpdateToggleImage();
         }
     }
 
-    void UpdateImageToggle()
+    void UpdateToggleImage()
     {
-        if(toggle != null)
+        if (toggle != null && activeImage != null && inactiveImage != null)
         {
-            if(objectToHide)
+            if (isObjectActive)
             {
-                activeSprite.gameObject.SetActive(true);
-                inactiveSprite.gameObject.SetActive(false);
+                activeImage.gameObject.SetActive(true);
+                inactiveImage.gameObject.SetActive(false);
             }
             else
             {
-                activeSprite.gameObject.SetActive(false);
-                inactiveSprite.gameObject.SetActive(true);
+                activeImage.gameObject.SetActive(false);
+                inactiveImage.gameObject.SetActive(true);
             }
         }
+        else
+        {
+            Debug.LogError("Toggle, Active Image, or Inactive Image is not assigned!");
+        }
     }
-
 }

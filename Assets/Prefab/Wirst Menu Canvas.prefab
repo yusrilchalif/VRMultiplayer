@@ -781,7 +781,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5374428830875627138}
+        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
+        m_MethodName: OnToggleValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &5374428830875627138
 MonoBehaviour:
@@ -795,11 +807,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 8890425877856761009, guid: e991be02c652341a7a5357805f991bdf,
+  objectToControl: {fileID: 8890425877856761009, guid: e991be02c652341a7a5357805f991bdf,
     type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 342106053224425085}
-  inactiveSprite: {fileID: 3049318643303802999}
+  activeImage: {fileID: 342106053224425085}
+  inactiveImage: {fileID: 3049318643303802999}
 --- !u!1 &1179422270120817811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1510,7 +1522,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8342997818631569718}
+        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
+        m_MethodName: OnToggleValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &8342997818631569718
 MonoBehaviour:
@@ -1524,11 +1548,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 442610457163139593, guid: 89fed98e90b2f4f09892eee69b1a2b6a,
+  objectToControl: {fileID: 442610457163139593, guid: 89fed98e90b2f4f09892eee69b1a2b6a,
     type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 8496970534806179323}
-  inactiveSprite: {fileID: 2000090012088875136}
+  activeImage: {fileID: 8496970534806179323}
+  inactiveImage: {fileID: 2000090012088875136}
 --- !u!1 &2088784284807231216
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,7 +1674,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0058849966, y: 127.20046}
+  m_AnchoredPosition: {x: 0.0058849966, y: 127.20599}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6647710395537031940
@@ -1816,7 +1840,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8246445318802727302}
+        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
+        m_MethodName: OnToggleValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &8246445318802727302
 MonoBehaviour:
@@ -1830,11 +1866,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 3674212064361000828, guid: b8de3e6aa3836442294e366f569a9100,
+  objectToControl: {fileID: 3674212064361000828, guid: b8de3e6aa3836442294e366f569a9100,
     type: 3}
   toggle: {fileID: 6131805724991694395}
-  activeSprite: {fileID: 4000317527780451033}
-  inactiveSprite: {fileID: 1143009263929028189}
+  activeImage: {fileID: 4000317527780451033}
+  inactiveImage: {fileID: 1143009263929028189}
 --- !u!1 &2590999554005354773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2667,7 +2703,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1301292646041332166}
   m_Direction: 2
   m_Value: 0.0001139313
-  m_Size: 0.57483596
+  m_Size: 0.57593334
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2991,7 +3027,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2061958581255612707}
+        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
+        m_MethodName: OnToggleValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &2061958581255612707
 MonoBehaviour:
@@ -3005,11 +3053,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 8769338660631091514, guid: 4ce44c7c42dee463a9d6da4a9bf62711,
+  objectToControl: {fileID: 8769338660631091514, guid: 4ce44c7c42dee463a9d6da4a9bf62711,
     type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 6000886549309610181}
-  inactiveSprite: {fileID: 7515275473723537782}
+  activeImage: {fileID: 6000886549309610181}
+  inactiveImage: {fileID: 7515275473723537782}
 --- !u!1 &3859363654038867143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3249,7 +3297,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6904069647646468478}
+        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
+        m_MethodName: OnToggleValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &6904069647646468478
 MonoBehaviour:
@@ -3263,11 +3323,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 763473571753932985, guid: 896e115e71ff54c62b50dfc7abd05f8c,
+  objectToControl: {fileID: 763473571753932985, guid: 896e115e71ff54c62b50dfc7abd05f8c,
     type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 1953359094861365106}
-  inactiveSprite: {fileID: 1685590641962481239}
+  activeImage: {fileID: 1953359094861365106}
+  inactiveImage: {fileID: 1685590641962481239}
 --- !u!1 &4123876884835935147
 GameObject:
   m_ObjectHideFlags: 0
@@ -3907,7 +3967,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5918266646035158398}
+        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
+        m_MethodName: OnToggleValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &5918266646035158398
 MonoBehaviour:
@@ -3921,11 +3993,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 6657678087750928168, guid: 9d9e14621fe6e4521b624b1ae64bd7c4,
+  objectToControl: {fileID: 6657678087750928168, guid: 9d9e14621fe6e4521b624b1ae64bd7c4,
     type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 7325608833746149861}
-  inactiveSprite: {fileID: 7655665794755199671}
+  activeImage: {fileID: 7325608833746149861}
+  inactiveImage: {fileID: 7655665794755199671}
 --- !u!1 &5160244026295877543
 GameObject:
   m_ObjectHideFlags: 0
@@ -4426,6 +4498,7 @@ GameObject:
   - component: {fileID: 1136935542474993102}
   - component: {fileID: 935325719664213201}
   - component: {fileID: 7375926258956611755}
+  - component: {fileID: 3388124353885985678}
   m_Layer: 5
   m_Name: Wirst Menu Canvas
   m_TagString: Untagged
@@ -4549,6 +4622,37 @@ MonoBehaviour:
   inputActions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   wristUICanvas: {fileID: 9125485570162891207}
+--- !u!114 &3388124353885985678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682317309309005808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 8342997818631569718}
+  - {fileID: 8246445318802727302}
+  - {fileID: 6904069647646468478}
+  - {fileID: 2061958581255612707}
+  - {fileID: 8626553823050049198}
+  - {fileID: 5918266646035158398}
+  - {fileID: 5218899610992907518}
+  - {fileID: 5374428830875627138}
+  - {fileID: 6068258337230563666}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &6781289903006838749
 GameObject:
   m_ObjectHideFlags: 0
@@ -5210,7 +5314,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5218899610992907518}
+        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
+        m_MethodName: OnToggleValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &5218899610992907518
 MonoBehaviour:
@@ -5224,11 +5340,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 611618407647010199, guid: 9d3942e2f81f442e8b9bcdc9053399c9,
+  objectToControl: {fileID: 611618407647010199, guid: 9d3942e2f81f442e8b9bcdc9053399c9,
     type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 6940873305987223977}
-  inactiveSprite: {fileID: 2320283552450254955}
+  activeImage: {fileID: 6940873305987223977}
+  inactiveImage: {fileID: 2320283552450254955}
 --- !u!1 &7804683584944774214
 GameObject:
   m_ObjectHideFlags: 0
@@ -5777,7 +5893,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6068258337230563666}
+        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
+        m_MethodName: OnToggleValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &6068258337230563666
 MonoBehaviour:
@@ -5791,11 +5919,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 7315270442319783311, guid: 0fde29923971645c3b44b87c6a82cc93,
+  objectToControl: {fileID: 7315270442319783311, guid: 0fde29923971645c3b44b87c6a82cc93,
     type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 2892211749031396230}
-  inactiveSprite: {fileID: 29778445565398174}
+  activeImage: {fileID: 2892211749031396230}
+  inactiveImage: {fileID: 29778445565398174}
 --- !u!1 &8428894186208028366
 GameObject:
   m_ObjectHideFlags: 0
@@ -6034,7 +6162,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8626553823050049198}
+        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
+        m_MethodName: OnToggleValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &8626553823050049198
 MonoBehaviour:
@@ -6048,11 +6188,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 6600150434374230169, guid: ff02d8949242e4ba09502cd38b10fb05,
+  objectToControl: {fileID: 6600150434374230169, guid: ff02d8949242e4ba09502cd38b10fb05,
     type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 2479955753390809036}
-  inactiveSprite: {fileID: 3942592986400886524}
+  activeImage: {fileID: 2479955753390809036}
+  inactiveImage: {fileID: 3942592986400886524}
 --- !u!1 &8784600269942351676
 GameObject:
   m_ObjectHideFlags: 0
