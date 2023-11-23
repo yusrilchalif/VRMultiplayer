@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using DG;
+using Photon.Pun;
 using DG.Tweening;
 
-public class ButtonHotspotController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class ButtonHotspotController : MonoBehaviourPunCallbacks, IPunObservable, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public GameObject panelInformation;
 
@@ -16,70 +16,96 @@ public class ButtonHotspotController : MonoBehaviour, IPointerEnterHandler, IPoi
     [SerializeField] float scaleDuration = 1.5f;
     [SerializeField] Vector3 minScale = new Vector3(0.5f, 0.5f, 1.0f);
     [SerializeField] Vector3 maxScale = new Vector3(1.5f, 1.5f, 1.0f);
+
+    private bool isPanelActive = false;
+
     void Start()
     {
-        panelInformation.SetActive(false);
+        if (photonView.IsMine)
+        {
+            panelInformation.SetActive(false);
+        }
         initialQuaternion = transform.rotation;
 
-        if(targetObject != null)
+        if (targetObject != null)
         {
             PlayScaleAnimation();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // if (target != null)
-        // {
-        //     panelInformation.transform.position = target.position + panelPosition;
-        //     lineRendererController.SetLinePoints(transform.position, target.position);
-        // }
-        // else
-        // {
-        //     //reset position
-        //     transform.rotation = initialQuaternion;
-        // }
-
+        // Update code here if necessary
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.DOScale(new Vector3(1.2f, 1.2f, 1.22f), 0.3f);
+        if (photonView.IsMine)
+        {
+            transform.DOScale(new Vector3(1.2f, 1.2f, 1.22f), 0.3f);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.DOScale(new Vector3(1f, 1f, 1f), 0.3f);
+        if (photonView.IsMine)
+        {
+            transform.DOScale(new Vector3(1f, 1f, 1f), 0.3f);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        OnPointerExit(eventData);
+        if (photonView.IsMine)
+        {
+            TogglePopUp();
+            photonView.RPC("TogglePopUpRPC", RpcTarget.Others);
+        }
+    }
+
+    [PunRPC]
+    void TogglePopUpRPC()
+    {
         TogglePopUp();
     }
 
     void TogglePopUp()
     {
-        if (panelInformation.activeSelf)
+        isPanelActive = !isPanelActive;
+
+        if (isPanelActive)
         {
-            panelInformation.SetActive(false);
-            // lineRendererController.DisableLine();
+            panelInformation.SetActive(true);
         }
         else
         {
-            panelInformation.SetActive(true);
-            // lineRendererController.EnableLine();
+            panelInformation.SetActive(false);
         }
     }
 
     void PlayScaleAnimation()
     {
-        Sequence scaleSequence = DOTween.Sequence();
+        if (photonView.IsMine)
+        {
+            Sequence scaleSequence = DOTween.Sequence();
 
-        scaleSequence.Append(targetObject.DOScale(maxScale, scaleDuration));
-        scaleSequence.AppendInterval(1.0f);
-        scaleSequence.Append(targetObject.DOScale(minScale, scaleDuration));
-        scaleSequence.SetLoops(-1);
+            scaleSequence.Append(targetObject.DOScale(maxScale, scaleDuration));
+            scaleSequence.AppendInterval(1.0f);
+            scaleSequence.Append(targetObject.DOScale(minScale, scaleDuration));
+            scaleSequence.SetLoops(-1);
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(isPanelActive);
+        }
+        else
+        {
+            isPanelActive = (bool)stream.ReceiveNext();
+            panelInformation.SetActive(isPanelActive);
+        }
     }
 }

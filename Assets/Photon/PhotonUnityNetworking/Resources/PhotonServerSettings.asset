@@ -44,7 +44,10 @@ MonoBehaviour:
   - CantHearYou
   - ChangeColour
   - HeresWhy
-  - TooglePlayPause
+  - TogglePopUpRPC
+  - PauseVideoSync
+  - PlayVideoSync
+  - TogglePlayPause
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

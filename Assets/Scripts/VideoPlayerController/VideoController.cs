@@ -1,54 +1,59 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using Photon.Pun;
 
-public class VideoController : MonoBehaviourPun
+public class VideoController : MonoBehaviourPun, IPunObservable
 {
-    [SerializeField] private VideoPlayer videoPlayer;
-    [SerializeField] Button playButton;
+    private VideoPlayer videoPlayer;
+    public Button playVideoBtn;
+    private bool isPaused = false;
+    public Sprite playButton, pauseButton;
 
-    public Sprite playIcon, pauseIcon;
-
-    bool isPlayVideo = false;
-    private PhotonView pv;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         videoPlayer = GetComponent<VideoPlayer>();
-        pv = GetComponent<PhotonView>();
-        playButton.onClick.AddListener(TooglePlayPause);
+        playVideoBtn.onClick.AddListener(TogglePlayPause);
 
-        if(pv.IsMine)
+        if (photonView.IsMine)
         {
-            videoPlayer.Play();
+            videoPlayer.Play(); // Mulai video untuk pemain lokal
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    [PunRPC]
+    private void TogglePlayPause()
     {
-        
+        if(photonView.IsMine)
+        {
+            photonView.RPC("ToggleVideo", RpcTarget.AllBuffered);
+        }
     }
 
     [PunRPC]
-    private void TooglePlayPause()
+    private void ToggleVideo()
     {
-        if(!pv.IsMine)
+        if(videoPlayer.isPlaying)
         {
-            if(isPlayVideo)
-            {
-                videoPlayer.Pause();
-                playButton.image.sprite = playIcon;
-            }
-            else
-            {
-                videoPlayer.Play();
-                playButton.image.sprite = pauseIcon;
-            }
+            videoPlayer.Pause();
+            playVideoBtn.image.sprite = pauseButton;
+        }
+        else
+        {
+            videoPlayer.Play();
+            playVideoBtn.image.sprite = playButton;
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(isPaused); // Mengirim status pause ke semua klien
+        }
+        else
+        {
+            isPaused = (bool)stream.ReceiveNext(); // Menerima status pause dari klien lain
         }
     }
 }
