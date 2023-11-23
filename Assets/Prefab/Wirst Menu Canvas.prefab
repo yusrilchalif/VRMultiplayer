@@ -795,10 +795,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 0}
+  objectToHide: {fileID: 8890425877856761009, guid: e991be02c652341a7a5357805f991bdf,
+    type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
+  activeSprite: {fileID: 342106053224425085}
+  inactiveSprite: {fileID: 3049318643303802999}
 --- !u!1 &1179422270120817811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,7 +1524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 0}
+  objectToHide: {fileID: 442610457163139593, guid: 89fed98e90b2f4f09892eee69b1a2b6a,
+    type: 3}
   toggle: {fileID: 3203849630603236083}
   activeSprite: {fileID: 8496970534806179323}
   inactiveSprite: {fileID: 2000090012088875136}
@@ -1648,7 +1650,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00066565257, y: 127.19947}
+  m_AnchoredPosition: {x: 0.0058849966, y: 127.20046}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6647710395537031940
@@ -1828,10 +1830,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 0}
-  toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
+  objectToHide: {fileID: 3674212064361000828, guid: b8de3e6aa3836442294e366f569a9100,
+    type: 3}
+  toggle: {fileID: 6131805724991694395}
+  activeSprite: {fileID: 4000317527780451033}
+  inactiveSprite: {fileID: 1143009263929028189}
 --- !u!1 &2590999554005354773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,7 +2667,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1301292646041332166}
   m_Direction: 2
   m_Value: 0.0001139313
-  m_Size: 0.5747318
+  m_Size: 0.57483596
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3002,10 +3005,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 0}
+  objectToHide: {fileID: 8769338660631091514, guid: 4ce44c7c42dee463a9d6da4a9bf62711,
+    type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
+  activeSprite: {fileID: 6000886549309610181}
+  inactiveSprite: {fileID: 7515275473723537782}
 --- !u!1 &3859363654038867143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3259,10 +3263,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 0}
+  objectToHide: {fileID: 763473571753932985, guid: 896e115e71ff54c62b50dfc7abd05f8c,
+    type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
+  activeSprite: {fileID: 1953359094861365106}
+  inactiveSprite: {fileID: 1685590641962481239}
 --- !u!1 &4123876884835935147
 GameObject:
   m_ObjectHideFlags: 0
@@ -3916,10 +3921,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 0}
+  objectToHide: {fileID: 6657678087750928168, guid: 9d9e14621fe6e4521b624b1ae64bd7c4,
+    type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
+  activeSprite: {fileID: 7325608833746149861}
+  inactiveSprite: {fileID: 7655665794755199671}
 --- !u!1 &5160244026295877543
 GameObject:
   m_ObjectHideFlags: 0
@@ -5218,10 +5224,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 0}
+  objectToHide: {fileID: 611618407647010199, guid: 9d3942e2f81f442e8b9bcdc9053399c9,
+    type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
+  activeSprite: {fileID: 6940873305987223977}
+  inactiveSprite: {fileID: 2320283552450254955}
 --- !u!1 &7804683584944774214
 GameObject:
   m_ObjectHideFlags: 0
@@ -5784,10 +5791,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 0}
+  objectToHide: {fileID: 7315270442319783311, guid: 0fde29923971645c3b44b87c6a82cc93,
+    type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
+  activeSprite: {fileID: 2892211749031396230}
+  inactiveSprite: {fileID: 29778445565398174}
 --- !u!1 &8428894186208028366
 GameObject:
   m_ObjectHideFlags: 0
@@ -6040,10 +6048,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToHide: {fileID: 0}
+  objectToHide: {fileID: 6600150434374230169, guid: ff02d8949242e4ba09502cd38b10fb05,
+    type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeSprite: {fileID: 0}
-  inactiveSprite: {fileID: 0}
+  activeSprite: {fileID: 2479955753390809036}
+  inactiveSprite: {fileID: 3942592986400886524}
 --- !u!1 &8784600269942351676
 GameObject:
   m_ObjectHideFlags: 0
