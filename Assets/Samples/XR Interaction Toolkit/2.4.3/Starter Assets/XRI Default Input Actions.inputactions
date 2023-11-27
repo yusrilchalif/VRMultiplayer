@@ -205,15 +205,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Menu",
-                    "type": "Button",
-                    "id": "4d0de6e8-f049-426e-a075-15aeb1e77ffc",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -579,17 +570,6 @@
                     "action": "UI Press Value",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9542c4eb-8c28-4472-a264-b26605ebd49a",
-                    "path": "<XRController>{LeftHand}/secondaryButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Menu",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -751,9 +731,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "ActiveLaser",
+                    "name": "Menu",
                     "type": "Button",
-                    "id": "2930c6fa-cddf-4990-942d-97edd875ad4f",
+                    "id": "dc902561-5085-4cff-aa6d-61e4a35b8de8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -1126,12 +1106,12 @@
                 },
                 {
                     "name": "",
-                    "id": "f548dc8e-7824-412f-aaf2-f8bb2c9f0d46",
-                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "id": "cdc210d8-02b2-4c59-a39b-0879616403c7",
+                    "path": "<XRController>{LeftHand}/secondaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ActiveLaser",
+                    "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

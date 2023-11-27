@@ -6818,6 +6818,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214258234}
   m_CullTransparentMesh: 1
+--- !u!1001 &1295183491
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
+        type: 3}
+      propertyPath: m_Name
+      value: XR Device Simulator (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
 --- !u!1 &1306913620
 GameObject:
   m_ObjectHideFlags: 0
@@ -23600,6 +23669,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pipa Air Hujan Group
       objectReference: {fileID: 0}
+    - target: {fileID: 6657678087750928168, guid: 9d9e14621fe6e4521b624b1ae64bd7c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d9e14621fe6e4521b624b1ae64bd7c4, type: 3}
 --- !u!4 &2282487563779550784 stripped
@@ -27042,6 +27116,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Springkle Water Group
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315270442319783311, guid: 0fde29923971645c3b44b87c6a82cc93,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8109427784846036535, guid: 0fde29923971645c3b44b87c6a82cc93,
         type: 3}
@@ -35632,6 +35711,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lift Group
       objectReference: {fileID: 0}
+    - target: {fileID: 6600150434374230169, guid: ff02d8949242e4ba09502cd38b10fb05,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff02d8949242e4ba09502cd38b10fb05, type: 3}
 --- !u!4 &4537071128013474539 stripped
@@ -38135,6 +38219,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: KusenGroup
+      objectReference: {fileID: 0}
+    - target: {fileID: 442610457163139593, guid: 89fed98e90b2f4f09892eee69b1a2b6a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8766939154416694966, guid: 89fed98e90b2f4f09892eee69b1a2b6a,
         type: 3}
@@ -58015,6 +58104,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pipa Air Kotor Group
       objectReference: {fileID: 0}
+    - target: {fileID: 8890425877856761009, guid: e991be02c652341a7a5357805f991bdf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e991be02c652341a7a5357805f991bdf, type: 3}
 --- !u!4 &7996562413673480794 stripped
@@ -59405,6 +59499,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlafonGroup
+      objectReference: {fileID: 0}
+    - target: {fileID: 763473571753932985, guid: 896e115e71ff54c62b50dfc7abd05f8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6932396361018884993, guid: 896e115e71ff54c62b50dfc7abd05f8c,
         type: 3}
@@ -67416,6 +67515,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AC Group
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769338660631091514, guid: 4ce44c7c42dee463a9d6da4a9bf62711,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ce44c7c42dee463a9d6da4a9bf62711, type: 3}

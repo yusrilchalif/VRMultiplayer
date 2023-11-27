@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using Photon.Pun;
 
-public class WirstUI : MonoBehaviour
+public class WirstUI : MonoBehaviourPunCallbacks
 {
     public InputActionAsset inputActions;
 
@@ -20,6 +21,11 @@ public class WirstUI : MonoBehaviour
         menu = inputActions.FindActionMap("XRI LeftHand").FindAction("Menu");
         menu.Enable();
         menu.performed += ToggleMenu;
+
+        if(!photonView.IsMine)
+        {
+            return;
+        }
     }
 
     private void OnDestroy()

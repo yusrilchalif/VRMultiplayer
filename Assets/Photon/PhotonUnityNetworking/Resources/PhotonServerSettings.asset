@@ -51,6 +51,17 @@ MonoBehaviour:
   - ToggleVideo
   - ToggleObjectActiveState
   - OnToggleValueChanged
+  - SyncObjectVisibility
+  - SyncToggleStatus
+  - SyncObjectToggle
+  - SyncToggleState
+  - InitializeStatus
+  - ToggleHideUnhide
+  - ChangeHideStatus
+  - ToggleObject
+  - SetActive
+  - SyncVisibility
+  - SyncToggleValue
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

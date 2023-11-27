@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 30f7d8f5f9f62433da947cba6767926a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eaf8671f1b09e4fdcaa323eef975e85a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc34ea9d4a9264958a2043b3626cd208, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -685,7 +685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 30f7d8f5f9f62433da947cba6767926a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -705,7 +705,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8654365838947207001}
   - component: {fileID: 4489580308896168330}
-  - component: {fileID: 5374428830875627138}
+  - component: {fileID: 6970946200678640808}
+  - component: {fileID: 1551405462458780159}
   m_Layer: 5
   m_Name: Toggle_SistemAirKotor
   m_TagString: Untagged
@@ -781,21 +782,9 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5374428830875627138}
-        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
-        m_MethodName: OnToggleValueChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
---- !u!114 &5374428830875627138
+--- !u!114 &6970946200678640808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -804,14 +793,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 1098089153673873737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 8890425877856761009, guid: e991be02c652341a7a5357805f991bdf,
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 1551405462458780159}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &1551405462458780159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098089153673873737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db3ff86d67d647ff8f2d8d3b2359ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToToggle: {fileID: 8890425877856761009, guid: e991be02c652341a7a5357805f991bdf,
     type: 3}
-  toggle: {fileID: 3203849630603236083}
-  activeImage: {fileID: 342106053224425085}
-  inactiveImage: {fileID: 3049318643303802999}
+  toggle: {fileID: 4489580308896168330}
 --- !u!1 &1179422270120817811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1446,7 +1456,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2306476456187745766}
   - component: {fileID: 3203849630603236083}
-  - component: {fileID: 8342997818631569718}
+  - component: {fileID: 7199890815946148475}
+  - component: {fileID: 2722568846261630122}
   m_Layer: 5
   m_Name: Toggle_Kusen
   m_TagString: Untagged
@@ -1522,21 +1533,9 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8342997818631569718}
-        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
-        m_MethodName: OnToggleValueChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
---- !u!114 &8342997818631569718
+--- !u!114 &7199890815946148475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1545,14 +1544,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 1770024072840566715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 442610457163139593, guid: 89fed98e90b2f4f09892eee69b1a2b6a,
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 2722568846261630122}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &2722568846261630122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770024072840566715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db3ff86d67d647ff8f2d8d3b2359ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToToggle: {fileID: 442610457163139593, guid: 89fed98e90b2f4f09892eee69b1a2b6a,
     type: 3}
   toggle: {fileID: 3203849630603236083}
-  activeImage: {fileID: 8496970534806179323}
-  inactiveImage: {fileID: 2000090012088875136}
 --- !u!1 &2088784284807231216
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,7 +1640,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 30f7d8f5f9f62433da947cba6767926a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1674,8 +1694,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0058849966, y: 127.20599}
-  m_SizeDelta: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0.0058849966, y: 0.016022684}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6647710395537031940
 MonoBehaviour:
@@ -1689,8 +1709,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 0
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
 --- !u!114 &2880198553868945912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1764,7 +1784,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8725521989744593305}
   - component: {fileID: 6131805724991694395}
-  - component: {fileID: 8246445318802727302}
+  - component: {fileID: 2659397653752050342}
+  - component: {fileID: 2327141224528197250}
   m_Layer: 5
   m_Name: Toggle_Kolom
   m_TagString: Untagged
@@ -1840,21 +1861,9 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8246445318802727302}
-        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
-        m_MethodName: OnToggleValueChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
---- !u!114 &8246445318802727302
+--- !u!114 &2659397653752050342
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1863,14 +1872,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 2522370934359264869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 3674212064361000828, guid: b8de3e6aa3836442294e366f569a9100,
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 2327141224528197250}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &2327141224528197250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2522370934359264869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db3ff86d67d647ff8f2d8d3b2359ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToToggle: {fileID: 3674212064361000828, guid: b8de3e6aa3836442294e366f569a9100,
     type: 3}
   toggle: {fileID: 6131805724991694395}
-  activeImage: {fileID: 4000317527780451033}
-  inactiveImage: {fileID: 1143009263929028189}
 --- !u!1 &2590999554005354773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,7 +2168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eaf8671f1b09e4fdcaa323eef975e85a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc34ea9d4a9264958a2043b3626cd208, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2571,7 +2601,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 30f7d8f5f9f62433da947cba6767926a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2702,8 +2732,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2009455738426878705}
   m_HandleRect: {fileID: 1301292646041332166}
   m_Direction: 2
-  m_Value: 0.0001139313
-  m_Size: 0.57593334
+  m_Value: 0.999811
+  m_Size: 0.51100045
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2774,7 +2804,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eaf8671f1b09e4fdcaa323eef975e85a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc34ea9d4a9264958a2043b3626cd208, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2851,7 +2881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 30f7d8f5f9f62433da947cba6767926a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2951,7 +2981,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8808080634691984061}
   - component: {fileID: 1312212944477094515}
-  - component: {fileID: 2061958581255612707}
+  - component: {fileID: 5372369471805933223}
+  - component: {fileID: 3327617171466632910}
   m_Layer: 5
   m_Name: Toggle_Sistem Hawa
   m_TagString: Untagged
@@ -3027,21 +3058,9 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2061958581255612707}
-        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
-        m_MethodName: OnToggleValueChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
---- !u!114 &2061958581255612707
+--- !u!114 &5372369471805933223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3050,14 +3069,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 3794671637292199585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 8769338660631091514, guid: 4ce44c7c42dee463a9d6da4a9bf62711,
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 3327617171466632910}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &3327617171466632910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3794671637292199585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db3ff86d67d647ff8f2d8d3b2359ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToToggle: {fileID: 8769338660631091514, guid: 4ce44c7c42dee463a9d6da4a9bf62711,
     type: 3}
-  toggle: {fileID: 3203849630603236083}
-  activeImage: {fileID: 6000886549309610181}
-  inactiveImage: {fileID: 7515275473723537782}
+  toggle: {fileID: 1312212944477094515}
 --- !u!1 &3859363654038867143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3124,7 +3164,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eaf8671f1b09e4fdcaa323eef975e85a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc34ea9d4a9264958a2043b3626cd208, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3201,7 +3241,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 30f7d8f5f9f62433da947cba6767926a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3221,7 +3261,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5249144848098143560}
   - component: {fileID: 7066826337880445610}
-  - component: {fileID: 6904069647646468478}
+  - component: {fileID: 5656633145506839769}
+  - component: {fileID: 5732367326662903177}
   m_Layer: 5
   m_Name: Toggle_Plafon
   m_TagString: Untagged
@@ -3297,21 +3338,9 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6904069647646468478}
-        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
-        m_MethodName: OnToggleValueChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
---- !u!114 &6904069647646468478
+--- !u!114 &5656633145506839769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3320,14 +3349,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 3919386660468556970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 763473571753932985, guid: 896e115e71ff54c62b50dfc7abd05f8c,
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 5732367326662903177}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &5732367326662903177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3919386660468556970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db3ff86d67d647ff8f2d8d3b2359ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToToggle: {fileID: 763473571753932985, guid: 896e115e71ff54c62b50dfc7abd05f8c,
     type: 3}
-  toggle: {fileID: 3203849630603236083}
-  activeImage: {fileID: 1953359094861365106}
-  inactiveImage: {fileID: 1685590641962481239}
+  toggle: {fileID: 7066826337880445610}
 --- !u!1 &4123876884835935147
 GameObject:
   m_ObjectHideFlags: 0
@@ -3891,7 +3941,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1595676690673439384}
   - component: {fileID: 8765135614892353142}
-  - component: {fileID: 5918266646035158398}
+  - component: {fileID: 6837368837772956606}
+  - component: {fileID: 8774912055042323129}
   m_Layer: 5
   m_Name: Toggle_SistemAirHujan
   m_TagString: Untagged
@@ -3967,21 +4018,9 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5918266646035158398}
-        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
-        m_MethodName: OnToggleValueChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
---- !u!114 &5918266646035158398
+--- !u!114 &6837368837772956606
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3990,14 +4029,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 4775039364169102659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 6657678087750928168, guid: 9d9e14621fe6e4521b624b1ae64bd7c4,
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 8774912055042323129}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &8774912055042323129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775039364169102659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db3ff86d67d647ff8f2d8d3b2359ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToToggle: {fileID: 6657678087750928168, guid: 9d9e14621fe6e4521b624b1ae64bd7c4,
     type: 3}
-  toggle: {fileID: 3203849630603236083}
-  activeImage: {fileID: 7325608833746149861}
-  inactiveImage: {fileID: 7655665794755199671}
+  toggle: {fileID: 8765135614892353142}
 --- !u!1 &5160244026295877543
 GameObject:
   m_ObjectHideFlags: 0
@@ -4127,7 +4187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 1503596662178464039}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -4383,7 +4443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 30f7d8f5f9f62433da947cba6767926a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4498,7 +4558,7 @@ GameObject:
   - component: {fileID: 1136935542474993102}
   - component: {fileID: 935325719664213201}
   - component: {fileID: 7375926258956611755}
-  - component: {fileID: 3388124353885985678}
+  - component: {fileID: 3729640196571689272}
   m_Layer: 5
   m_Name: Wirst Menu Canvas
   m_TagString: Untagged
@@ -4622,7 +4682,7 @@ MonoBehaviour:
   inputActions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   wristUICanvas: {fileID: 9125485570162891207}
---- !u!114 &3388124353885985678
+--- !u!114 &3729640196571689272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4640,16 +4700,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 8342997818631569718}
-  - {fileID: 8246445318802727302}
-  - {fileID: 6904069647646468478}
-  - {fileID: 2061958581255612707}
-  - {fileID: 8626553823050049198}
-  - {fileID: 5918266646035158398}
-  - {fileID: 5218899610992907518}
-  - {fileID: 5374428830875627138}
-  - {fileID: 6068258337230563666}
+  ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4864,7 +4915,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eaf8671f1b09e4fdcaa323eef975e85a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc34ea9d4a9264958a2043b3626cd208, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5238,7 +5289,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3479709722535279014}
   - component: {fileID: 1757932618360596358}
-  - component: {fileID: 5218899610992907518}
+  - component: {fileID: 369109075619506690}
+  - component: {fileID: 1618761486628193968}
   m_Layer: 5
   m_Name: Toggle_SistemAirBersih
   m_TagString: Untagged
@@ -5314,21 +5366,9 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5218899610992907518}
-        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
-        m_MethodName: OnToggleValueChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
---- !u!114 &5218899610992907518
+--- !u!114 &369109075619506690
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5337,14 +5377,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 7759309965101454100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 611618407647010199, guid: 9d3942e2f81f442e8b9bcdc9053399c9,
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 1618761486628193968}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &1618761486628193968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7759309965101454100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db3ff86d67d647ff8f2d8d3b2359ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToToggle: {fileID: 611618407647010199, guid: 9d3942e2f81f442e8b9bcdc9053399c9,
     type: 3}
-  toggle: {fileID: 3203849630603236083}
-  activeImage: {fileID: 6940873305987223977}
-  inactiveImage: {fileID: 2320283552450254955}
+  toggle: {fileID: 1757932618360596358}
 --- !u!1 &7804683584944774214
 GameObject:
   m_ObjectHideFlags: 0
@@ -5583,7 +5644,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 30f7d8f5f9f62433da947cba6767926a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5660,7 +5721,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 30f7d8f5f9f62433da947cba6767926a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5817,7 +5878,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3217073864958006972}
   - component: {fileID: 3331824158034182030}
-  - component: {fileID: 6068258337230563666}
+  - component: {fileID: 4078625468211966251}
+  - component: {fileID: 4995699806371442589}
   m_Layer: 5
   m_Name: Toggle_SistemProteksiKebakaran
   m_TagString: Untagged
@@ -5893,21 +5955,9 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6068258337230563666}
-        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
-        m_MethodName: OnToggleValueChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
---- !u!114 &6068258337230563666
+--- !u!114 &4078625468211966251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5916,14 +5966,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 8364099136966987213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 7315270442319783311, guid: 0fde29923971645c3b44b87c6a82cc93,
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 4995699806371442589}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &4995699806371442589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8364099136966987213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db3ff86d67d647ff8f2d8d3b2359ab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToToggle: {fileID: 7315270442319783311, guid: 0fde29923971645c3b44b87c6a82cc93,
     type: 3}
-  toggle: {fileID: 3203849630603236083}
-  activeImage: {fileID: 2892211749031396230}
-  inactiveImage: {fileID: 29778445565398174}
+  toggle: {fileID: 3331824158034182030}
 --- !u!1 &8428894186208028366
 GameObject:
   m_ObjectHideFlags: 0
@@ -5990,7 +6061,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eaf8671f1b09e4fdcaa323eef975e85a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc34ea9d4a9264958a2043b3626cd208, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6066,7 +6137,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eaf8671f1b09e4fdcaa323eef975e85a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc34ea9d4a9264958a2043b3626cd208, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6086,7 +6157,8 @@ GameObject:
   m_Component:
   - component: {fileID: 879334547376225215}
   - component: {fileID: 8075976231923905240}
-  - component: {fileID: 8626553823050049198}
+  - component: {fileID: 5903097773976416007}
+  - component: {fileID: 6685468330015896883}
   m_Layer: 5
   m_Name: Toggle_Lift
   m_TagString: Untagged
@@ -6162,21 +6234,9 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8626553823050049198}
-        m_TargetAssemblyTypeName: ToggleSyncController, Assembly-CSharp
-        m_MethodName: OnToggleValueChanged
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 1
---- !u!114 &8626553823050049198
+--- !u!114 &5903097773976416007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6185,14 +6245,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 8784444563374383674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d466d1fc893d4816a4230145ee681a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7db3ff86d67d647ff8f2d8d3b2359ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToControl: {fileID: 6600150434374230169, guid: ff02d8949242e4ba09502cd38b10fb05,
+  prefabToToggle: {fileID: 6600150434374230169, guid: ff02d8949242e4ba09502cd38b10fb05,
     type: 3}
-  toggle: {fileID: 3203849630603236083}
-  activeImage: {fileID: 2479955753390809036}
-  inactiveImage: {fileID: 3942592986400886524}
+  toggle: {fileID: 8075976231923905240}
+--- !u!114 &6685468330015896883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8784444563374383674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 5903097773976416007}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &8784600269942351676
 GameObject:
   m_ObjectHideFlags: 0
@@ -6339,7 +6420,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eaf8671f1b09e4fdcaa323eef975e85a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc34ea9d4a9264958a2043b3626cd208, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6452,7 +6533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: eaf8671f1b09e4fdcaa323eef975e85a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc34ea9d4a9264958a2043b3626cd208, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
