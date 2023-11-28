@@ -18,7 +18,7 @@ MonoBehaviour:
     AppIdVoice: 143a2b25-cffd-4cbc-a703-37fca403c10b
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: 
+    FixedRegion: au
     Server: 
     Port: 0
     ProxyServer: 
@@ -27,7 +27,7 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: asia
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -62,6 +62,10 @@ MonoBehaviour:
   - SetActive
   - SyncVisibility
   - SyncToggleValue
+  - TogglePrefab
+  - InstantiatePrefab
+  - ToggleVisibility
+  - TogglePrefabVisibility
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 7546720933361504356}
   - component: {fileID: 2632668295376895265}
   - component: {fileID: 7546720933361504355}
-  - component: {fileID: 535644120555923800}
+  - component: {fileID: -7903444199819560181}
   m_Layer: 0
   m_Name: Tiang Gedung
-  m_TagString: Untagged
+  m_TagString: HideObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1508495211652040411, guid: adb5470e68c8e4b4aa9b02e4d9badfe7, type: 3}
---- !u!114 &535644120555923800
+--- !u!114 &-7903444199819560181
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

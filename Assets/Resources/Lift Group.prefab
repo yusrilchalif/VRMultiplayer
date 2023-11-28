@@ -891,10 +891,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3490025466117934395}
-  - component: {fileID: 6784813501883229001}
+  - component: {fileID: 6331997171794505617}
   m_Layer: 0
   m_Name: Lift Group
-  m_TagString: Untagged
+  m_TagString: HideObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -926,7 +926,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6784813501883229001
+--- !u!114 &6331997171794505617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

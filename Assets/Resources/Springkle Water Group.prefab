@@ -1651,10 +1651,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8109427784846036535}
-  - component: {fileID: 1535188612933766002}
+  - component: {fileID: -6516997928796846988}
   m_Layer: 0
   m_Name: Springkle Water Group
-  m_TagString: Untagged
+  m_TagString: HideObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1678,7 +1678,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1535188612933766002
+--- !u!114 &-6516997928796846988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6031927791350771991}
   - component: {fileID: 6496366878552913846}
   - component: {fileID: 6496366878552913841}
-  - component: {fileID: -5012745702459519742}
+  - component: {fileID: -898551437797177066}
   m_Layer: 0
-  m_Name: 'Pipa Air Bersih '
-  m_TagString: Untagged
+  m_Name: Pipa Air Bersih
+  m_TagString: HideObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3374206085389892019, guid: adb5470e68c8e4b4aa9b02e4d9badfe7, type: 3}
---- !u!114 &-5012745702459519742
+--- !u!114 &-898551437797177066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
