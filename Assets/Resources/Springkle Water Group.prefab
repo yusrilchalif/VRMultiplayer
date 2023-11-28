@@ -1654,7 +1654,7 @@ GameObject:
   - component: {fileID: -6516997928796846988}
   m_Layer: 0
   m_Name: Springkle Water Group
-  m_TagString: HideObj
+  m_TagString: Springkle_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

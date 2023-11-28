@@ -5432,7 +5432,7 @@ PrefabInstance:
     - target: {fileID: 6279427334478809339, guid: 51c5dc5e694764e9c81eb9a32a56f33e,
         type: 3}
       propertyPath: m_TagString
-      value: HideObj
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7906174480038319269, guid: 51c5dc5e694764e9c81eb9a32a56f33e,
         type: 3}
@@ -18045,6 +18045,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Pipa Air Bersih '
       objectReference: {fileID: 0}
+    - target: {fileID: 611618407647010199, guid: 9d3942e2f81f442e8b9bcdc9053399c9,
+        type: 3}
+      propertyPath: m_TagString
+      value: PipaBersih_Group
+      objectReference: {fileID: 0}
     - target: {fileID: 1779610791937996212, guid: 9d3942e2f81f442e8b9bcdc9053399c9,
         type: 3}
       propertyPath: m_RootOrder
@@ -23699,6 +23704,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6657678087750928168, guid: 9d9e14621fe6e4521b624b1ae64bd7c4,
+        type: 3}
+      propertyPath: m_TagString
+      value: PipaHujan_Group
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d9e14621fe6e4521b624b1ae64bd7c4, type: 3}
 --- !u!4 &2282487563779550784 stripped
@@ -27156,6 +27166,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315270442319783311, guid: 0fde29923971645c3b44b87c6a82cc93,
+        type: 3}
+      propertyPath: m_TagString
+      value: Springkle_Group
       objectReference: {fileID: 0}
     - target: {fileID: 8109427784846036535, guid: 0fde29923971645c3b44b87c6a82cc93,
         type: 3}
@@ -35269,6 +35284,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tiang Gedung
       objectReference: {fileID: 0}
+    - target: {fileID: 3674212064361000828, guid: b8de3e6aa3836442294e366f569a9100,
+        type: 3}
+      propertyPath: m_TagString
+      value: Kolom_Group
+      objectReference: {fileID: 0}
     - target: {fileID: 4466426769927066286, guid: b8de3e6aa3836442294e366f569a9100,
         type: 3}
       propertyPath: m_RootOrder
@@ -35765,6 +35785,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6600150434374230169, guid: ff02d8949242e4ba09502cd38b10fb05,
+        type: 3}
+      propertyPath: m_TagString
+      value: Lift_Group
       objectReference: {fileID: 0}
     - target: {fileID: 6784813501883229001, guid: ff02d8949242e4ba09502cd38b10fb05,
         type: 3}
@@ -38279,6 +38304,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 442610457163139593, guid: 89fed98e90b2f4f09892eee69b1a2b6a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Kusen_Hide
       objectReference: {fileID: 0}
     - target: {fileID: 7421362766830248685, guid: 89fed98e90b2f4f09892eee69b1a2b6a,
         type: 3}
@@ -58184,6 +58214,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8890425877856761009, guid: e991be02c652341a7a5357805f991bdf,
+        type: 3}
+      propertyPath: m_TagString
+      value: PipaKotor_Group
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e991be02c652341a7a5357805f991bdf, type: 3}
 --- !u!4 &7996562413673480794 stripped
@@ -59584,6 +59619,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763473571753932985, guid: 896e115e71ff54c62b50dfc7abd05f8c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Plafon_Group
       objectReference: {fileID: 0}
     - target: {fileID: 5134279841320585257, guid: 896e115e71ff54c62b50dfc7abd05f8c,
         type: 3}
@@ -67615,6 +67655,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769338660631091514, guid: 4ce44c7c42dee463a9d6da4a9bf62711,
+        type: 3}
+      propertyPath: m_TagString
+      value: AC_Hide
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ce44c7c42dee463a9d6da4a9bf62711, type: 3}

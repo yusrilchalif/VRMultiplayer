@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: -2815864245182920761}
   m_Layer: 0
   m_Name: Pipa Air Kotor Group
-  m_TagString: HideObj
+  m_TagString: PipaKotor_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

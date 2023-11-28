@@ -9,6 +9,7 @@ public class ToggleController : MonoBehaviourPunCallbacks, IPunObservable
 {
     public GameObject prefabToToggle;
     public Toggle toggle;
+    public string tagToToogle;
 
     private void Start()
     {
@@ -27,7 +28,7 @@ public class ToggleController : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     private void ToggleVisibility(bool newValue, PhotonMessageInfo info)
     {
-        GameObject[] prefabs = GameObject.FindGameObjectsWithTag("HideObj");
+        GameObject[] prefabs = GameObject.FindGameObjectsWithTag(tagToToogle);
 
         foreach (GameObject prefab in prefabs)
         {

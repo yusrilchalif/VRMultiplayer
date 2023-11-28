@@ -894,7 +894,7 @@ GameObject:
   - component: {fileID: 6331997171794505617}
   m_Layer: 0
   m_Name: Lift Group
-  m_TagString: HideObj
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7421362766830248685}
   m_Layer: 0
   m_Name: KusenGroup
-  m_TagString: HideObj
+  m_TagString: Kusen_Hide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

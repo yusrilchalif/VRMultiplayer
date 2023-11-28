@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: -6269494445887432342}
   m_Layer: 0
   m_Name: Pipa Air Hujan Group
-  m_TagString: HideObj
+  m_TagString: PipaHujan_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

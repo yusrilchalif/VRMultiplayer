@@ -4,7 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - HideObj
+  - AC_Hide
+  - Kusen_Hide
+  - Lift_Group
+  - PipaHujan_Group
+  - PipaKotor_Group
+  - Springkle_Group
+  - PipaBersih_Group
+  - Kolom_Group
+  - Plafon_Group
   layers:
   - Default
   - TransparentFX
