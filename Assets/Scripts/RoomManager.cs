@@ -149,4 +149,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 
     #endregion
+
+    #region
+    public void QuitApps()
+    {
+        PhotonNetwork.LeaveRoom();
+        Application.Quit();
+    }
+    #endregion
 }
