@@ -38706,7 +38706,7 @@ PrefabInstance:
     - target: {fileID: 442610457163139593, guid: 89fed98e90b2f4f09892eee69b1a2b6a,
         type: 3}
       propertyPath: m_TagString
-      value: Lift_Group
+      value: Kusen_Hide
       objectReference: {fileID: 0}
     - target: {fileID: 7421362766830248685, guid: 89fed98e90b2f4f09892eee69b1a2b6a,
         type: 3}

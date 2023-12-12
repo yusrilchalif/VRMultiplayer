@@ -10,14 +10,14 @@ public class ButtonVisibility : MonoBehaviourPunCallbacks
     public Sprite spriteHidden; // Sprite ketika objek dihide
     public Sprite spriteUnhidden; // Sprite ketika objek diunhide
 
-    private bool isHidden = false;
+    private bool isHidden = true;
     public Image buttonImage;
     private GameObject[] objectsWithTag;
 
     private void Start()
     {
         buttonImage = GetComponent<Image>();
-        isHidden = false; // Kondisi awal: unhide
+        isHidden = true; // Kondisi awal: unhide
         ToggleObjectState(); // Set kondisi awal objek
 
         // Mengecek jika objek ini milik pemain lokal
