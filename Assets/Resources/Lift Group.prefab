@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4835436044242739981}
   m_Layer: 0
   m_Name: TL L1.002
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 7714171998572056934}
   m_Layer: 0
   m_Name: TL L1.005
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 323291941263420156}
   m_Layer: 0
   m_Name: TL L3.003
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 8137737750284696493}
   m_Layer: 0
   m_Name: TL L2.001
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 4890965364828748267}
   m_Layer: 0
   m_Name: TL L2.002
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 4879536067910672457}
   m_Layer: 0
   m_Name: TL L1.003
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 6485718906903396484}
   m_Layer: 0
   m_Name: TL L4.003
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 4982629164273887567}
   m_Layer: 0
   m_Name: TL L4.002
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -798,7 +798,7 @@ GameObject:
   - component: {fileID: 5872344260655777222}
   m_Layer: 0
   m_Name: TL L1.004
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -894,7 +894,7 @@ GameObject:
   - component: {fileID: 6331997171794505617}
   m_Layer: 0
   m_Name: Lift Group
-  m_TagString: Lift_Group
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -962,7 +962,7 @@ GameObject:
   - component: {fileID: 6017647663875650092}
   m_Layer: 0
   m_Name: TD L2.001
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1060,7 +1060,7 @@ GameObject:
   - component: {fileID: 7727676027649335412}
   m_Layer: 0
   m_Name: TL L3.002
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1158,7 +1158,7 @@ GameObject:
   - component: {fileID: 5206868697481225228}
   m_Layer: 0
   m_Name: TL L2.003
-  m_TagString: Untagged
+  m_TagString: Lift_Group
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

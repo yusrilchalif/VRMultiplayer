@@ -4954,6 +4954,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -61
       objectReference: {fileID: 0}
+    - target: {fileID: 5903097773976416007, guid: 41e0d377aa5694fee858c29fd6588779,
+        type: 3}
+      propertyPath: tagToToggle
+      value: Lift_Group
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903097773976416007, guid: 41e0d377aa5694fee858c29fd6588779,
+        type: 3}
+      propertyPath: prefabVisibility.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903097773976416007, guid: 41e0d377aa5694fee858c29fd6588779,
+        type: 3}
+      propertyPath: prefabVisibility.Array.data[0]
+      value: 
+      objectReference: {fileID: 6600150434374230169, guid: ff02d8949242e4ba09502cd38b10fb05,
+        type: 3}
     - target: {fileID: 6428881399085730563, guid: 41e0d377aa5694fee858c29fd6588779,
         type: 3}
       propertyPath: m_AnchorMax.y

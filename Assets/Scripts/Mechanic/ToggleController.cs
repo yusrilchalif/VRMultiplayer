@@ -7,9 +7,10 @@ using Photon.Realtime;
 
 public class ToggleController : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public GameObject prefabToToggle;
     public Toggle toggle;
-    public string tagToToogle;
+    public string tagObject;
+
+    private List<GameObject> savePrefab;
 
     private void Start()
     {
@@ -18,22 +19,59 @@ public class ToggleController : MonoBehaviourPunCallbacks, IPunObservable
         {
             toggle.onValueChanged.AddListener(OnToggleValueChanged);
         }
+
+        savePrefab = new List<GameObject>();
+
+
     }
 
     private void OnToggleValueChanged(bool newValue)
     {
-        photonView.RPC("ToggleVisibility", RpcTarget.All, newValue);
+        photonView.RPC("TogglePrefab", RpcTarget.AllBuffered, newValue, tagObject);
     }
 
     [PunRPC]
-    private void ToggleVisibility(bool newValue, PhotonMessageInfo info)
+    private void TogglePrefab(bool newValue, string tagName)
     {
-        GameObject[] prefabs = GameObject.FindGameObjectsWithTag(tagToToogle);
+
+        GameObject[] prefabs = GameObject.FindGameObjectsWithTag(tagName);
+
+        if (savePrefab == null)
+        {
+            savePrefab = new List<GameObject>();
+        }
 
         foreach (GameObject prefab in prefabs)
         {
+            // Sembunyikan atau tampilkan prefab berdasarkan nilai newValue
             prefab.SetActive(newValue);
+
+            // Jika newValue adalah true (visible), tambahkan prefab ke savePrefab
+            if (newValue)
+            {
+                // Pastikan prefab belum ada di dalam savePrefab sebelum menambahkannya
+                if (!savePrefab.Contains(prefab))
+                {
+                    savePrefab.Add(prefab);
+                }
+            }
+            else // Jika newValue adalah false (hidden)
+            {
+                // Hapus prefab dari savePrefab jika sudah ada di dalamnya
+                if (savePrefab.Contains(prefab))
+                {
+                    savePrefab.Remove(prefab);
+                }
+            }
+
+            // Jika newValue adalah true (visible) dan prefab tidak ada di dalam savePrefab
+            if (newValue && !savePrefab.Contains(prefab))
+            {
+                prefab.SetActive(true);
+            }
         }
+
+        Debug.Log("Toggle state changed to: " + newValue + " for tag: " + tagName);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

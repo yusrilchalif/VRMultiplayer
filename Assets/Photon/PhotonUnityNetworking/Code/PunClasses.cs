@@ -418,6 +418,11 @@ namespace Photon.Pun
         public virtual void OnErrorInfo(ErrorInfo errorInfo)
         {
         }
+
+        public void OnRoomPropertiesUpdate(System.Collections.Hashtable propertiesThatChanged)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
