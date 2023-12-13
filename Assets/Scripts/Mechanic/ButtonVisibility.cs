@@ -9,9 +9,9 @@ public class ButtonVisibility : MonoBehaviourPunCallbacks
     public string objectTag; // Tag yang akan di-hide/unhide
     public Sprite spriteHidden; // Sprite ketika objek dihide
     public Sprite spriteUnhidden; // Sprite ketika objek diunhide
+    public Image buttonImage;
 
     private bool isHidden = true;
-    public Image buttonImage;
     private GameObject[] objectsWithTag;
 
     private void Start()
@@ -60,32 +60,29 @@ public class ButtonVisibility : MonoBehaviourPunCallbacks
             }
         }
 
-        UpdateButtonSprite(); // Perbarui sprite pada tombol
+        //UpdateButtonSprite(); // Perbarui sprite pada tombol
+        photonView.RPC("UpdateButtonSpriteRPC", RpcTarget.AllBuffered, isHidden);
     }
 
     [PunRPC]
-    private void UpdateButtonSpriteRPC(bool isObjHidden)
+    private void UpdateButtonSpriteRPC(bool objHidden)
     {
-        if (buttonImage != null)
-        {
-            isHidden = isObjHidden;
-            UpdateButtonSprite(); // Panggil metode UpdateButtonSprite untuk memperbarui sprite
-        }
-        else
-        {
-            Debug.LogError("Button Image kosong!");
-        }
+        isHidden = objHidden;
+        UpdateButtonSprite(); // Perbarui sprite pada tombol
     }
 
     private void UpdateButtonSprite()
     {
-        if (buttonImage != null)
+        if (photonView.IsMine) // Hanya pemain lokal yang akan mengubah sprite
         {
-            buttonImage.sprite = isHidden ? spriteHidden : spriteUnhidden;
-        }
-        else
-        {
-            Debug.LogError("Button Image kosong!");
+            if (isHidden)
+            {
+                buttonImage.sprite = spriteHidden;
+            }
+            else
+            {
+                buttonImage.sprite = spriteUnhidden;
+            }
         }
     }
 }
